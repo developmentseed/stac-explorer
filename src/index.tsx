@@ -49,20 +49,16 @@ const CollectionList: React.FC<CollectionListProps> = ({ collections }) => {
 };
 
 const CollectionsDropdown = () => {
-  const [data, setData] = useState(null);
-  let collections: Collection[] = [];
+  let [collections, setCollections] = useState([]);
   useEffect(() => {
     // Fetch the JSON file
-    fetchCollections().then(setData);
+    fetchCollections().then(setCollections);
   }, []);
 
-  if (data) {
-    collections = data;
-  }
 
   return (
     <div>
-      {data ? <CollectionList collections={collections} /> : 'Loading...'}
+      {collections ? <CollectionList collections={collections} /> : 'Loading...'}
     </div>
   );
 };
