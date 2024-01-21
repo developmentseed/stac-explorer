@@ -27,7 +27,7 @@ interface CollectionListProps {
   collections: Collection[]; // Ensure this matches the type being passed
 }
 
-const CollectionList: React.FC<CollectionListProps> = ({ collections }) => {
+const CollectionList = ({ collections }: CollectionListProps) => {
   const [selectedCollection, setSelectedCollection] = useState<string>('');
 
   const handleSelectionChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
