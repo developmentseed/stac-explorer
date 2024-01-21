@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# stac-explorer
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A UI for visualizing data from STAC collections. Supports visualizing data in NASA's CMR when a STAC collection definition exists.
 
 ## Available Scripts
 
