@@ -1,20 +1,20 @@
 [
-  {
-    "id": "gpm-3imergdf-07-cmr",
-    "collectionStacUrl": "http://somehost/gpm-3imergdf-07-cmr_collection.json", 
-    "displayName": "GPM IMERG Final Precipitation L3 (GPM_3IMERGDF.v07)",
-    "tiler": "http://titiler-cmr"
-  },
-  {
-    "id": "hlsl30-v2-cmr",
-    "collectionStacUrl": "http://somehost/hlsl30-v2-cmr_collection.json",
-    "displayName": "HLS Landsat Operational Land Imager Surface Reflectance and TOA Brightness Daily Global 30m v2.0",
-    "tiler": "http://titiler-cmr"
-  },
-  {
-    "id": "mursst-cmr",
-    "collectionStacUrl": "http://somehost/mur-jpl-l4-glob-v4-1-cmr_collection.json", 
-    "displayName": "GHRSST Level 4 MUR Global Foundation Sea Surface Temperature Analysis (v4.1)",
-    "tiler": "http://titiler-cmr"
-  }
+    {
+      "id": "gpm-3imergdf-07-cmr",
+      "collectionStacUrl": "http://somehost/gpm-3imergdf-07-cmr_collection.json", 
+      "displayName": "GPM IMERG Final Precipitation L3 (GPM_3IMERGDF.v07)",
+      "tiler": "http://titiler-cmr"
+    },
+    {
+       "id": "hlsl30-v2-cmr",
+       "collectionStacUrl": "http://somehost/hlsl30-v2-cmr_collection.json",
+       "displayName": "HLS Landsat Operational Land Imager Surface Reflectance and TOA Brightness Daily Global 30m v2.0",
+       "tiler": "http://titiler-cmr"
+    },
+    {
+        "id": "mursst-v4-1-cmr",
+        "collectionStacUrl": "http://somehost/mur-jpl-l4-glob-v4-1-cmr_collection.json", 
+        "displayName": "GHRSST Level 4 MUR Global Foundation Sea Surface Temperature Analysis (v4.1)",
+        "tiler": "http://titiler-cmr"
+    }
 ]
