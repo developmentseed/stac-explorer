@@ -7,16 +7,7 @@ import {
   Container,
 } from "@chakra-ui/react";
 import theme from "./theme";
-import CollectionsDropdown from './CollectionsDropdown';
-
-const DataSelector = () => {
-  return (
-    <Box bg='papayawhip'>
-      <CollectionsDropdown />
-      {/* additional components for the collection select, the variables checkbox, the date picker */}
-    </Box>
-  );
-};
+import DataSelector from './components/DataSelector';
 
 export default function App() {
   return (
