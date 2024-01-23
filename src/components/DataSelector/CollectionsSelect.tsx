@@ -1,4 +1,4 @@
-import { Select } from "@chakra-ui/react";
+import { FormControl, FormLabel, Select } from "@chakra-ui/react";
 import { CollectionConfig } from "../../types";
 
 type Props = {
@@ -15,14 +15,17 @@ function CollectionsSelect({
   const handleSelect = (event: React.ChangeEvent<HTMLSelectElement>) => setSelectedCollection(event.target.value);
 
   return (
-    <Select overflow="hidden" value={selectedCollection} onChange={handleSelect}>
-      <option value="">Select an option</option>
-      {collections.map(collection => (
-        <option key={collection.id} value={collection.id}>
-          {collection.displayName}
-        </option>
-      ))}
-    </Select>
+    <FormControl>
+      <FormLabel>Select collection</FormLabel>
+      <Select overflow="hidden" value={selectedCollection} onChange={handleSelect}>
+        <option value="">Select an option</option>
+        {collections.map(collection => (
+          <option key={collection.id} value={collection.id}>
+            {collection.displayName}
+          </option>
+        ))}
+      </Select>
+    </FormControl>
   );
 }
 
