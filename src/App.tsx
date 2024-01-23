@@ -17,9 +17,9 @@ export default function App() {
         p="5"
         h="100vh"
       >
-        <GridItem bg='tomato'>
+        <GridItem>
           <DataSelector />
-          <Box bg='papayawhip'>other selections</Box>
+          <Box>other selections</Box>
         </GridItem>
         <GridItem bg='lightblue'>map</GridItem>
       </Grid>

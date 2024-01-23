@@ -9,7 +9,7 @@ function DataSelector() {
   const { collections } = useCollections();
 
   return (
-    <Box bg='papayawhip'>
+    <Box>
       <CollectionsSelect
         collections={collections}
         selectedCollection={selectedCollection}
