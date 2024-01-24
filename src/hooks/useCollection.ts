@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useState } from "react";
 import useCollections from "./useCollections";
-import { StacCollection } from "stac-ts";
+import { Collection } from "../types";
 
 type UseCollectionFn = {
   isLoading: boolean;
   error?: string;
-  collection?: StacCollection;
+  collection?: Collection;
 }
 
 function useCollection(selectedCollection?: string): UseCollectionFn {
@@ -13,12 +13,12 @@ function useCollection(selectedCollection?: string): UseCollectionFn {
   const [ isLoading, setIsLoading ] = useState<boolean>(false);
   const [ error, setError ] = useState<string>();
 
-  const [ collectionCache, setCollectionCache ] = useState<Map<string, StacCollection>>(new Map<string, StacCollection>())
-  const [ collection, setCollection ] = useState<StacCollection>();
+  const [ collectionCache, setCollectionCache ] = useState<Map<string, Collection>>(new Map<string, Collection>())
+  const [ collection, setCollection ] = useState<Collection>();
 
   const getCollection = useCallback((id: string) => collectionCache.get(id), [collectionCache]);
 
-  const addCollection = useCallback((id: string, collection: StacCollection) => {
+  const addCollection = useCallback((id: string, collection: Collection) => {
     setCollectionCache(new Map(collectionCache.set(id, collection)));
   }, [collectionCache]);
 
@@ -31,7 +31,7 @@ function useCollection(selectedCollection?: string): UseCollectionFn {
     const collectionConfig = collections.find(({ id }) => selectedCollection === id);
     const { collectionStacUrl } = collectionConfig!;
 
-    new Promise<StacCollection>((resolve, reject) => {
+    new Promise<Collection>((resolve, reject) => {
       const c = getCollection(selectedCollection);
       if (c) {
         resolve(c);

@@ -1,13 +1,26 @@
-import { StacCollection } from "stac-ts";
+import { Alert, AlertDescription, AlertIcon, AlertTitle } from "@chakra-ui/alert";
+
+import CubeVariablesSelect from "./CubeVairablesSelect";
+import { Collection } from "../../../types";
 
 type Props = {
-  collection: StacCollection
+  collection: Collection
 }
 
 function VariablesSelect({ collection }: Props) {
-  return (
-    <h1>VariablesSelect</h1>
-  );
+  const cubeVariables = collection["cube:variables"];
+
+  if (cubeVariables) {
+    return <CubeVariablesSelect collection={collection} />
+  } else {
+    return (
+      <Alert status="warning">
+        <AlertIcon />
+        <AlertTitle>Data in this cannot be visualized.</AlertTitle>
+        <AlertDescription>The collection does not implement the datacube or render STAC extenstions.</AlertDescription>
+      </Alert>
+    );
+  }
 }
 
 export default VariablesSelect;
