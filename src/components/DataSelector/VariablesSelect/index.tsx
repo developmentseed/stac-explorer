@@ -5,7 +5,6 @@ type Props = {
 }
 
 function VariablesSelect({ collection }: Props) {
-  
   return (
     <h1>VariablesSelect</h1>
   );
