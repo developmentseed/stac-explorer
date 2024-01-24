@@ -1,6 +1,5 @@
 import {
   ChakraProvider,
-  Box,
   Grid,
   GridItem,
   Text
@@ -20,7 +19,6 @@ export default function App() {
         <GridItem>
           <Text as="h1" fontSize="large" fontWeight="bold" textTransform="uppercase" borderBottom="1px solid" borderColor="gray.100" mb="4" pb="4">STAC Explorer</Text>
           <DataSelector />
-          <Box>other selections</Box>
         </GridItem>
         <GridItem bg='lightblue'>map</GridItem>
       </Grid>

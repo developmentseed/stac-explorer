@@ -16,5 +16,11 @@
         "collectionStacUrl": "http://somehost/mur-jpl-l4-glob-v4-1-cmr_collection.json", 
         "displayName": "GHRSST Level 4 MUR Global Foundation Sea Surface Temperature Analysis (v4.1)",
         "tiler": "http://titiler-cmr"
+    },
+    {
+      "id": "MUR-JPL-L4-GLOB-v4_1",
+      "collectionStacUrl": "/stac/MUR-JPL-L4-GLOB-v4_1.stac.json", 
+      "displayName": "MUR-JPL-L4-GLOB-v4_1",
+      "tiler": "http://titiler-cmr"
     }
 ]
