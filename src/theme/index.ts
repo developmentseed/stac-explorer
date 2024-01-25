@@ -1,4 +1,5 @@
 import { extendTheme } from "@chakra-ui/react";
+import Form from "./Form";
 
 export default extendTheme({
   styles: {
@@ -10,5 +11,6 @@ export default extendTheme({
     }
   },
   components: {
+    Form
   },
 });
