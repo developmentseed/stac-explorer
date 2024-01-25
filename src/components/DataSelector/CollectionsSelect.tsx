@@ -15,7 +15,7 @@ function CollectionsSelect({
   const handleSelect = (event: React.ChangeEvent<HTMLSelectElement>) => setSelectedCollection(event.target.value);
 
   return (
-    <FormControl>
+    <FormControl mb="4">
       <FormLabel>Select collection</FormLabel>
       <Select overflow="hidden" value={selectedCollection} onChange={handleSelect}>
         <option value="">Select an option</option>

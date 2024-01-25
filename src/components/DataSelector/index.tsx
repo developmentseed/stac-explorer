@@ -1,12 +1,18 @@
 import { useState } from "react";
 import { Box } from "@chakra-ui/react";
 
-import { useCollections } from "../../hooks";
+import { useCollection, useCollections } from "../../hooks";
+import { Error } from "../generic";
 import CollectionsSelect from "./CollectionsSelect";
+import VariablesSelect from "./VariablesSelect";
+
 
 function DataSelector() {
-  const [ selectedCollection, setSelectedCollection ] = useState<string>();
   const { collections } = useCollections();
+  const [ selectedCollection, setSelectedCollection ] = useState<string>();
+  const { collection, error: collectionError } = useCollection(selectedCollection);
+
+  const displayError = collectionError;
 
   return (
     <Box>
@@ -15,7 +21,8 @@ function DataSelector() {
         selectedCollection={selectedCollection}
         setSelectedCollection={setSelectedCollection}
       />
-      {/* additional components for the collection select, the variables checkbox, the date picker */}
+      { collection && <VariablesSelect collection={collection} /> }
+      { displayError && <Error>{ displayError }</Error> }
     </Box>
   );
 };
