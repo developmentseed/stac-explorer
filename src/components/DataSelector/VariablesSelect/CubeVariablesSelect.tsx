@@ -21,11 +21,11 @@ function CubeVariablesSelect({ collection }: Props) {
       <FormControl as="fieldset">
         <legend>Select variable</legend>
         <RadioGroup name="variable" onChange={setSelectedVar} value={selectedVar}>
-          {Object.keys(cubeVariables).map((variable) => (
-            <Stack direction="column">
+          <Stack direction="column">
+            {Object.keys(cubeVariables).map((variable) => (
               <Radio value={variable} key={variable}>{ variable }</Radio>
-            </Stack>
-          ))}
+            ))}
+          </Stack>
         </RadioGroup>
       </FormControl>
       <FormControl>
