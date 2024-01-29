@@ -1,6 +1,6 @@
 import { Alert, AlertDescription, AlertIcon, AlertTitle } from "@chakra-ui/alert";
 
-import CubeVariablesSelect from "./CubeVairablesSelect";
+import CubeVariablesSelect from "./CubeVariablesSelect";
 import { Collection } from "../../../types";
 
 type Props = {
