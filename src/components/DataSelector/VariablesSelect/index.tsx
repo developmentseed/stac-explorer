@@ -16,7 +16,7 @@ function VariablesSelect({ collection }: Props) {
     return (
       <Alert status="warning">
         <AlertIcon />
-        <AlertTitle>Data in this cannot be visualized.</AlertTitle>
+        <AlertTitle>Data from this collection cannot be visualized.</AlertTitle>
         <AlertDescription>The collection does not implement the datacube or render STAC extenstions.</AlertDescription>
       </Alert>
     );
