@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import useCollections from "./useCollections";
-import { Collection } from "../types";
+import { Collection, CollectionConfig } from "../types";
 
 type UseCollectionFn = {
   isLoading: boolean;
@@ -8,7 +8,7 @@ type UseCollectionFn = {
   collection?: Collection;
 }
 
-function useCollection(selectedCollection?: string): UseCollectionFn {
+function useCollection(selectedCollection?: CollectionConfig): UseCollectionFn {
   const { collections } = useCollections();
   const [ isLoading, setIsLoading ] = useState<boolean>(false);
   const [ error, setError ] = useState<string>();
@@ -28,11 +28,11 @@ function useCollection(selectedCollection?: string): UseCollectionFn {
 
     if (!collections || !selectedCollection) return;
 
-    const collectionConfig = collections.find(({ id }) => selectedCollection === id);
+    const collectionConfig = collections.find(({ id }) => selectedCollection.id === id);
     const { collectionStacUrl } = collectionConfig!;
 
     new Promise<Collection>((resolve, reject) => {
-      const c = getCollection(selectedCollection);
+      const c = getCollection(selectedCollection.id);
       if (c) {
         resolve(c);
       } else {
@@ -44,7 +44,7 @@ function useCollection(selectedCollection?: string): UseCollectionFn {
             return response.json();
           })
           .then(response => {
-            addCollection(selectedCollection, response);
+            addCollection(selectedCollection.id, response);
             resolve(response);
           })
           .catch((err) => reject(err));

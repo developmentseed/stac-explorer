@@ -1,14 +1,11 @@
 import { useState } from "react";
-import { FormControl, FormLabel, Radio, RadioGroup, Stack } from "@chakra-ui/react";
+import { Button, FormControl, FormLabel, Radio, RadioGroup, Stack } from "@chakra-ui/react";
 
-import { Collection } from "../../../types";
 import DateTimeSlider from "../../generic/DateTimeSlider";
+import { renderConfigToUrlParams } from "../../../utils";
+import { SelectProps } from "./types";
 
-type Props = {
-  collection: Collection;
-}
-
-function CubeVariablesSelect({ collection }: Props) {
+function CubeVariablesSelect({ config, collection, addLayer }: SelectProps) {
   const [ selectedVar, setSelectedVar ] = useState<string>();
   const [ selectedTime, setSelectedTime ] = useState<string>();
 
@@ -16,8 +13,30 @@ function CubeVariablesSelect({ collection }: Props) {
   const { time } = collection['cube:dimensions'];
   const [ timeMin, timeMax ] = time.extent;
 
+  const onSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const renderConfig = {
+      variable: selectedVar,
+      timestep: selectedTime,
+      concept_id: collection.collection_concept_id,
+      ...collection.renders[selectedVar!]
+    }
+
+    addLayer({
+      id: crypto.randomUUID(),
+      name: collection.id,
+      tileUrl: `${config.tiler}/tiles/{z}/{x}/{y}/?${renderConfigToUrlParams(renderConfig)}`,
+      config: {
+        variable: selectedVar,
+        timestep: selectedTime,
+        collection: collection.id
+      }
+    });
+  }
+
   return (
-    <>
+    <form onSubmit={onSubmit}>
       <FormControl as="fieldset">
         <legend>Select variable</legend>
         <RadioGroup name="variable" onChange={setSelectedVar} value={selectedVar}>
@@ -38,7 +57,8 @@ function CubeVariablesSelect({ collection }: Props) {
           setSelectedTime={setSelectedTime}
         />
       </FormControl>
-    </>
+      <Button type="submit">Add layer</Button>
+    </form>
   );
 }
 

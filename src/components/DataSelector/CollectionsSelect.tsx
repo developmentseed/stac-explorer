@@ -3,8 +3,8 @@ import { CollectionConfig } from "../../types";
 
 type Props = {
   collections?: CollectionConfig[];
-  selectedCollection?: string;
-  setSelectedCollection: (collectionId?: string) => void;
+  selectedCollection?: CollectionConfig;
+  setSelectedCollection: (collection?: CollectionConfig) => void;
 }
 
 function CollectionsSelect({
@@ -12,12 +12,14 @@ function CollectionsSelect({
   selectedCollection,
   setSelectedCollection
 }: Props) {
-  const handleSelect = (event: React.ChangeEvent<HTMLSelectElement>) => setSelectedCollection(event.target.value);
+  const handleSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedCollection(collections.find(({ id }) => id === event.target.value))
+  };
 
   return (
     <FormControl mb="4">
       <FormLabel>Select collection</FormLabel>
-      <Select overflow="hidden" value={selectedCollection} onChange={handleSelect}>
+      <Select overflow="hidden" value={selectedCollection?.id} onChange={handleSelect}>
         <option value="">Select an option</option>
         {collections.map(collection => (
           <option key={collection.id} value={collection.id}>
