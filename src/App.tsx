@@ -20,7 +20,7 @@ export default function App() {
     ])
   }, [layers]);
 
-  const setLayerVisibility = (( layerId: string, isVisible: boolean) => {
+  const setLayerVisibility = ( layerId: string, isVisible: boolean) => {
     const updatedLayers = layers.map((layer) => {
       if (layer.id === layerId) {
         return {
@@ -32,7 +32,12 @@ export default function App() {
       }
     });
     setLayers(updatedLayers);
-  });
+  };
+
+  const removeLayer = (layerId: string) => {
+    const updatedLayers = layers.filter(({ id }) => id !== layerId);
+    setLayers(updatedLayers);
+  }
 
   return (
     <ChakraProvider theme={theme}>
@@ -48,7 +53,7 @@ export default function App() {
         </GridItem>
         <GridItem bg='lightblue'>map</GridItem>
         <GridItem>
-          <LayerList layers={layers} setVisibility={setLayerVisibility} />
+          <LayerList layers={layers} setVisibility={setLayerVisibility} removeLayer={removeLayer} />
         </GridItem>
       </Grid>
     </ChakraProvider>
