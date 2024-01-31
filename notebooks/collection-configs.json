@@ -1,0 +1,42 @@
+{
+  "GPM_3IMERGDF.07": {
+    "short_name": "GPM_3IMERGDF",
+    "version": "07",
+    "temporal_step": "P1D",
+    "variables": {
+      "precipitation": {
+        "rescale": [[0, 48]],
+        "colormap": "cfastie"
+      },
+      "MWprecipitation": {
+        "rescale": [[0, 50]],
+        "colormap": "cfastie"
+      },
+      "randomError": {
+        "rescale": [[0, 17469]],
+        "colormap": "reds"
+      }
+    },
+    "reference_system": "4326"
+  },
+  "MUR-JPL-L4-GLOB-v4.1": {
+    "short_name": "MUR-JPL-L4-GLOB-v4.1",
+    "version": "4.1",
+    "temporal_step": "P1D",
+    "variables": {
+      "analysed_sst": {
+        "rescale": [[271, 30]],
+        "colormap": "rainbow"
+      },
+      "analysis_error": {
+        "rescale": [[0, 0.5]],
+        "colormap": "reds"
+      },
+      "sea_ice_fraction": {
+        "rescale": [[0, 1]],
+        "colormap": "gist_gray_r"
+      }
+    },
+    "reference_system": "4326"
+  }
+}

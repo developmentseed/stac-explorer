@@ -1,7 +1,7 @@
 [
     {
       "id": "gpm-3imergdf-07-cmr",
-      "collectionStacUrl": "http://somehost/gpm-3imergdf-07-cmr_collection.json", 
+      "collectionStacUrl": "/stac/GPM_3IMERGDF.stac.json", 
       "displayName": "GPM IMERG Final Precipitation L3 (GPM_3IMERGDF.v07)",
       "tiler": "http://titiler-cmr"
     },
