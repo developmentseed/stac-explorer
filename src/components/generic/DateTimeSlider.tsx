@@ -1,9 +1,9 @@
-import { useState } from "react";
 import { Slider, SliderFilledTrack, SliderThumb, SliderTrack, Text } from "@chakra-ui/react";
+import React from "react";
 import { parse } from "tinyduration";
 
-function epochToDisplayDate(epoch: number): string {
-  return new Date(epoch).toUTCString();
+function epochToDisplayDate(epoch?: number): string | undefined {
+  return epoch ? new Date(epoch).toUTCString() : undefined;
 }
 
 type Props = {
@@ -11,7 +11,8 @@ type Props = {
   max?: string | null;
   step: string;
   "aria-labelledby": string;
-  setSelectedTime: (dateTime: string) => void;
+  onChange: (dateTime: string) => void;
+  value: string;
 }
 
 function DateTimeSlider({
@@ -19,11 +20,13 @@ function DateTimeSlider({
   max,
   step,
   "aria-labelledby": ariaLabelledBy,
-  setSelectedTime
+  value,
+  onChange,
+  ...field
 }: Props) {
   const minMs = min ? Date.parse(min) : 0;
   const maxMs = max ? Date.parse(max) : Date.now();
-  const [ internalTime, setInternalTime ] = useState<number>(minMs);
+  const valueMs = value ? Date.parse(value) : undefined;
 
   const { days, hours, minutes, seconds } = parse(step);
   const interval = 
@@ -36,13 +39,14 @@ function DateTimeSlider({
     <>
       <Slider
         aria-labelledby={ariaLabelledBy}
-        aria-valuetext={epochToDisplayDate(internalTime)}
+        aria-valuetext={epochToDisplayDate(valueMs)}
         min={minMs}
         max={maxMs}
         step={interval}
         defaultValue={minMs}
-        onChange={(v) => setInternalTime(v)}
-        onChangeEnd={(v) => setSelectedTime(new Date(v).toISOString())}
+        value={valueMs}
+        onChange={(v) => onChange(new Date(v).toISOString())}
+        {...field}
       >
         <SliderTrack>
           <SliderFilledTrack />
@@ -54,10 +58,14 @@ function DateTimeSlider({
         fontSize="sm"
         aria-hidden={true}
       >
-        { epochToDisplayDate(internalTime) }
+        { epochToDisplayDate(valueMs) }
       </Text>
     </>
   )
 }
 
-export default DateTimeSlider;
+export default React.forwardRef<HTMLInputElement, Props>(
+  (props: Props, ref) => (
+    <DateTimeSlider {...props} />
+  )
+);;

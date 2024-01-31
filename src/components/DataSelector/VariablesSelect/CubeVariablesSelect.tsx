@@ -1,26 +1,32 @@
-import { useState } from "react";
-import { Button, FormControl, FormLabel, Radio, RadioGroup, Stack } from "@chakra-ui/react";
+import { Button, FormControl, FormErrorMessage, FormLabel, Radio, RadioGroup, Stack } from "@chakra-ui/react";
+import { useForm, Controller, SubmitHandler } from "react-hook-form"
 
 import DateTimeSlider from "../../generic/DateTimeSlider";
 import { renderConfigToUrlParams } from "../../../utils";
 import { SelectProps } from "./types";
 
-function CubeVariablesSelect({ config, collection, addLayer }: SelectProps) {
-  const [ selectedVar, setSelectedVar ] = useState<string>();
-  const [ selectedTime, setSelectedTime ] = useState<string>();
+type FormValues = {
+  variable: string;
+  timestep: string;
+}
 
+function CubeVariablesSelect({ config, collection, addLayer }: SelectProps) {
   const cubeVariables = collection['cube:variables'];
   const { time } = collection['cube:dimensions'];
   const [ timeMin, timeMax ] = time.extent;
 
-  const onSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormValues>();
 
+  const onSubmit: SubmitHandler<FormValues> = ({ variable, timestep }) => {
     const renderConfig = {
-      variable: selectedVar,
-      timestep: selectedTime,
+      variable,
+      timestep,
       concept_id: collection.collection_concept_id,
-      ...collection.renders[selectedVar!]
+      ...collection.renders[variable]
     }
 
     addLayer({
@@ -28,34 +34,58 @@ function CubeVariablesSelect({ config, collection, addLayer }: SelectProps) {
       name: collection.id,
       tileUrl: `${config.tiler}/tiles/{z}/{x}/{y}/?${renderConfigToUrlParams(renderConfig)}`,
       config: {
-        variable: selectedVar,
-        timestep: selectedTime,
+        variable,
+        timestep,
         collection: collection.id
       }
     });
   }
 
   return (
-    <form onSubmit={onSubmit}>
-      <FormControl as="fieldset">
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <FormControl as="fieldset" isInvalid={!!errors.variable}>
         <legend>Select variable</legend>
-        <RadioGroup name="variable" onChange={setSelectedVar} value={selectedVar}>
-          <Stack direction="column">
-            {Object.keys(cubeVariables).map((variable) => (
-              <Radio value={variable} key={variable}>{ variable }</Radio>
-            ))}
-          </Stack>
-        </RadioGroup>
-      </FormControl>
-      <FormControl>
-        <FormLabel as="div" id="time-slider-label">Select time</FormLabel>
-        <DateTimeSlider
-          min={timeMin}
-          max={timeMax}
-          step={time.step}
-          aria-labelledby="time-slider-label"
-          setSelectedTime={setSelectedTime}
+        <Controller
+          name="variable"
+          control={control}
+          render={({ field }) => (
+            <RadioGroup {...field}>
+              <Stack direction="column">
+                {Object.keys(cubeVariables).map((variable) => (
+                  <Radio value={variable} key={variable}>{ variable }</Radio>
+                ))}
+              </Stack>
+            </RadioGroup>
+          )}
+          rules={{
+            required: { value: true, message: "Select a variable." }
+          }}
         />
+        { errors.variable && (
+          <FormErrorMessage>{ errors.variable.message }</FormErrorMessage>
+        )}
+      </FormControl>
+      <FormControl isInvalid={!!errors.timestep}>
+        <FormLabel as="div" id="time-slider-label">Select time</FormLabel>
+        <Controller
+          name="timestep"
+          control={control}
+          render={({ field }) => (
+            <DateTimeSlider
+              min={timeMin}
+              max={timeMax}
+              step={time.step}
+              aria-labelledby="time-slider-label"
+              {...field}
+            />
+          )}
+          rules={{
+            required: { value: true, message: "Select a time step." }
+          }}
+        />
+        { errors.timestep && (
+          <FormErrorMessage>{ errors.timestep.message }</FormErrorMessage>
+        )}
       </FormControl>
       <Button type="submit">Add layer</Button>
     </form>
