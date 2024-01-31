@@ -33,6 +33,7 @@ function CubeVariablesSelect({ config, collection, addLayer }: SelectProps) {
       id: crypto.randomUUID(),
       name: collection.id,
       tileUrl: `${config.tiler}/tiles/{z}/{x}/{y}/?${renderConfigToUrlParams(renderConfig)}`,
+      isVisible: true,
       config: {
         variable,
         timestep,

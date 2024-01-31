@@ -8,10 +8,10 @@ import theme from "./theme";
 import DataSelector from './components/DataSelector';
 import { useCallback, useState } from "react";
 import { LayerConfig } from "./types";
+import LayerList from "./components/LayerList";
 
 export default function App() {
   const [ layers, setLayers ] = useState<LayerConfig[]>([]);
-  // console.log(layers);
 
   const addLayer = useCallback((newLayer: LayerConfig) => {
     setLayers([
@@ -20,10 +20,24 @@ export default function App() {
     ])
   }, [layers]);
 
+  const setLayerVisibility = (( layerId: string, isVisible: boolean) => {
+    const updatedLayers = layers.map((layer) => {
+      if (layer.id === layerId) {
+        return {
+          ...layer,
+          isVisible
+        }
+      } else {
+        return layer;
+      }
+    });
+    setLayers(updatedLayers);
+  });
+
   return (
     <ChakraProvider theme={theme}>
       <Grid
-        templateColumns="300px 1fr"
+        templateColumns="300px 1fr 300px"
         gap="5"
         p="5"
         h="100vh"
@@ -33,6 +47,9 @@ export default function App() {
           <DataSelector addLayer={addLayer} />
         </GridItem>
         <GridItem bg='lightblue'>map</GridItem>
+        <GridItem>
+          <LayerList layers={layers} setVisibility={setLayerVisibility} />
+        </GridItem>
       </Grid>
     </ChakraProvider>
   );

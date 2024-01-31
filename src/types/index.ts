@@ -40,6 +40,7 @@ export type LayerConfig = {
   id: string;
   name: string;
   tileUrl: string;
+  isVisible: boolean;
   config: {
     collection: string;
     variable?: string;
