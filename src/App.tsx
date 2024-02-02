@@ -11,7 +11,6 @@ import { LayerConfig } from "./types";
 
 export default function App() {
   const [ layers, setLayers ] = useState<LayerConfig[]>([]);
-  // console.log(layers);
 
   const addLayer = useCallback((newLayer: LayerConfig) => {
     setLayers([

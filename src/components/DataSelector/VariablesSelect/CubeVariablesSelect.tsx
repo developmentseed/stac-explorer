@@ -1,8 +1,6 @@
-import { Button, FormControl, FormErrorMessage, FormLabel, Radio, RadioGroup, Stack } from "@chakra-ui/react";
+import { Button, FormControl, FormErrorMessage, Radio, RadioGroup, Stack } from "@chakra-ui/react";
 import { useForm, Controller, SubmitHandler } from "react-hook-form"
 
-import DateTimeSlider from "../../generic/DateTimeSlider";
-import { renderConfigToUrlParams } from "../../../utils";
 import { SelectProps } from "./types";
 
 type FormValues = {
@@ -13,7 +11,7 @@ type FormValues = {
 function CubeVariablesSelect({ config, collection, addLayer }: SelectProps) {
   const cubeVariables = collection['cube:variables'];
   const { time } = collection['cube:dimensions'];
-  const [ timeMin, timeMax ] = time.extent;
+  const [ timeMin ] = time.extent;
 
   const {
     control,
@@ -21,21 +19,13 @@ function CubeVariablesSelect({ config, collection, addLayer }: SelectProps) {
     formState: { errors },
   } = useForm<FormValues>();
 
-  const onSubmit: SubmitHandler<FormValues> = ({ variable, timestep }) => {
-    const renderConfig = {
-      variable,
-      timestep,
-      concept_id: collection.collection_concept_id,
-      ...collection.renders[variable]
-    }
-
+  const onSubmit: SubmitHandler<FormValues> = ({ variable }) => {
     addLayer({
       id: crypto.randomUUID(),
       name: collection.id,
-      tileUrl: `${config.tiler}/tiles/{z}/{x}/{y}/?${renderConfigToUrlParams(renderConfig)}`,
       config: {
         variable,
-        timestep,
+        timestep: timeMin || '1970-01-01T00:00:00Z',
         collection: collection.id
       }
     });
@@ -65,28 +55,7 @@ function CubeVariablesSelect({ config, collection, addLayer }: SelectProps) {
           <FormErrorMessage>{ errors.variable.message }</FormErrorMessage>
         )}
       </FormControl>
-      <FormControl isInvalid={!!errors.timestep}>
-        <FormLabel as="div" id="time-slider-label">Select time</FormLabel>
-        <Controller
-          name="timestep"
-          control={control}
-          render={({ field }) => (
-            <DateTimeSlider
-              min={timeMin}
-              max={timeMax}
-              step={time.step}
-              aria-labelledby="time-slider-label"
-              {...field}
-            />
-          )}
-          rules={{
-            required: { value: true, message: "Select a time step." }
-          }}
-        />
-        { errors.timestep && (
-          <FormErrorMessage>{ errors.timestep.message }</FormErrorMessage>
-        )}
-      </FormControl>
+
       <Button type="submit">Add layer</Button>
     </form>
   );

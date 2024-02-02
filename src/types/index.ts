@@ -39,7 +39,6 @@ export type Collection = StacCollection & DataCubeCollection;
 export type LayerConfig = {
   id: string;
   name: string;
-  tileUrl: string;
   config: {
     collection: string;
     variable?: string;
