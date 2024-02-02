@@ -4,21 +4,15 @@ import {
   GridItem,
   Text
 } from "@chakra-ui/react";
+
 import theme from "./theme";
 import DataSelector from './components/DataSelector';
-import { useCallback, useState } from "react";
-import { LayerConfig } from "./types";
 import { CollectionsProvider } from "./context/collections";
+import { useLayers } from "./hooks";
 
 export default function App() {
-  const [ layers, setLayers ] = useState<LayerConfig[]>([]);
-
-  const addLayer = useCallback((newLayer: LayerConfig) => {
-    setLayers([
-      ...layers,
-      newLayer
-    ])
-  }, [layers]);
+  const { layers, addLayer } = useLayers();
+  console.log(layers);
 
   return (
     <ChakraProvider theme={theme}>
