@@ -8,7 +8,7 @@ type LayerFormProps = {
 }
 
 function LayerForm({ config, updateLayer }: LayerFormProps) {
-  const { collection: collectionId } = config.config;
+  const { collection: collectionId } = config.renderConfig;
   const { collections, isLoading: collectionsIsLoading } = useCollections();
   const collectionConfig = collections?.find(({ id }) => id === collectionId);
   const { collection, isLoading: collectionIsLoading } = useCollection(collectionConfig);

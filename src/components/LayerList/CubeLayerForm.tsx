@@ -19,8 +19,8 @@ function CubeLayerForm({ config, collection, updateLayer }: Props) {
   const submit = () => {
     updateLayer({
       ...config,
-      config: {
-        ...config.config,
+      renderConfig: {
+        ...config.renderConfig,
         timestep: selectedTime
       }
     })
@@ -34,7 +34,7 @@ function CubeLayerForm({ config, collection, updateLayer }: Props) {
         max={timeMax}
         step={time.step}
         aria-labelledby={labelId}
-        value={selectedTime || config.config.timestep || timeMin}
+        value={selectedTime || config.renderConfig.timestep || timeMin}
         onChange={setSelectedTime}
         onChangeEnd={submit}
       />

@@ -23,7 +23,7 @@ function CubeVariablesSelect({ config, collection, addLayer }: SelectProps) {
     addLayer({
       id: crypto.randomUUID(),
       name: collection.id,
-      config: {
+      renderConfig: {
         variable,
         timestep: timeMin || '1970-01-01T00:00:00Z',
         collection: config.id

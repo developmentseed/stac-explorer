@@ -39,7 +39,7 @@ export type Collection = StacCollection & DataCubeCollection;
 export type LayerConfig = {
   id: string;
   name: string;
-  config: {
+  renderConfig: {
     collection: string;
     variable?: string;
     timestep?: string;
