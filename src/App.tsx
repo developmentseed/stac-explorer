@@ -14,8 +14,6 @@ import LayerList from "./components/LayerList";
 export default function App() {
   const { layers, addLayer, updateLayer } = useLayers();
 
-  console.log(layers);
-
   return (
     <ChakraProvider theme={theme}>
       <CollectionsProvider>
