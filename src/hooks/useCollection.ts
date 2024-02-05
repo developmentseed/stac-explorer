@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import useCollections from "./useCollections";
-import { Collection, CollectionConfig } from "../types";
+import { Collection } from "../types";
 import { useCollectionsContext } from "../context/collections";
 
 type UseCollectionFn = {
@@ -9,7 +9,7 @@ type UseCollectionFn = {
   collection?: Collection;
 }
 
-function useCollection(selectedCollection?: CollectionConfig): UseCollectionFn {
+function useCollection(selectedCollection?: string): UseCollectionFn {
   const { collections } = useCollections();
   const [ isLoading, setIsLoading ] = useState<boolean>(false);
   const [ error, setError ] = useState<string>();
@@ -24,11 +24,11 @@ function useCollection(selectedCollection?: CollectionConfig): UseCollectionFn {
 
     if (!collections || !selectedCollection) return;
 
-    const collectionConfig = collections.find(({ id }) => selectedCollection.id === id);
+    const collectionConfig = collections.find(({ id }) => selectedCollection === id);
     const { collectionStacUrl } = collectionConfig!;
 
     new Promise<Collection>((resolve, reject) => {
-      const c = getCollection(selectedCollection.id);
+      const c = getCollection(selectedCollection);
       if (c) {
         resolve(c);
       } else {
@@ -40,7 +40,7 @@ function useCollection(selectedCollection?: CollectionConfig): UseCollectionFn {
             return response.json();
           })
           .then(response => {
-            addCollection(selectedCollection.id, response);
+            addCollection(selectedCollection, response);
             resolve(response);
           })
           .catch((err) => reject(err));

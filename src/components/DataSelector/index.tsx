@@ -5,7 +5,7 @@ import { useCollection, useCollections } from "../../hooks";
 import { Error } from "../generic";
 import CollectionsSelect from "./CollectionsSelect";
 import VariablesSelect from "./VariablesSelect";
-import { CollectionConfig, LayerConfig } from "../../types";
+import { LayerConfig } from "../../types";
 
 type Props = {
   addLayer: (layerConfig: LayerConfig) => void
@@ -15,8 +15,9 @@ type Props = {
 function DataSelector({ addLayer }: Props) {
   const { collections } = useCollections();
 
-  const [ selectedCollection, setSelectedCollection ] = useState<CollectionConfig>();
+  const [ selectedCollection, setSelectedCollection ] = useState<string>();
   const { collection, error: collectionError } = useCollection(selectedCollection);
+  const collectionConfig = collections?.find(({ id }) => id === selectedCollection);
 
   const displayError = collectionError;
 
@@ -27,7 +28,7 @@ function DataSelector({ addLayer }: Props) {
         selectedCollection={selectedCollection}
         setSelectedCollection={setSelectedCollection}
       />
-      { (selectedCollection && collection) && <VariablesSelect config={selectedCollection} collection={collection} addLayer={addLayer} /> }
+      { (collectionConfig && collection) && <VariablesSelect config={collectionConfig} collection={collection} addLayer={addLayer} /> }
       { displayError && <Error>{ displayError }</Error> }
     </Box>
   );
