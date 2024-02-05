@@ -13,7 +13,7 @@ import LayerList from "./components/LayerList";
 import Map from "./components/Map";
 
 export default function App() {
-  const { layers, addLayer, updateLayer, setVisibility } = useLayers();
+  const { layers, addLayer, updateLayer, removeLayer, setVisibility } = useLayers();
 
   return (
     <ChakraProvider theme={theme}>
@@ -30,6 +30,7 @@ export default function App() {
               layers={layers}
               updateLayer={updateLayer}
               setVisibility={setVisibility}
+              removeLayer={removeLayer}
             />
             <DataSelector addLayer={addLayer} />
           </GridItem>
