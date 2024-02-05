@@ -10,10 +10,9 @@ type Props = {
 function Layerlist({ layers, updateLayer }: Props) {
   return (
     <>
-      <Text as="h3" fontWeight="bold">Layers</Text>
+      <Text as="h3" fontWeight="bold" mb="2">Layers</Text>
       <Accordion allowToggle>
         {layers.map((layer) => {
-          console.log(layer);
           const { id, name } = layer;
           return (
             <AccordionItem key={id}>

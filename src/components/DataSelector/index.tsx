@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Box } from "@chakra-ui/react";
+import { Box, Button, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure } from "@chakra-ui/react";
 
 import { useCollection, useCollections } from "../../hooks";
 import { Error } from "../generic";
@@ -18,18 +18,36 @@ function DataSelector({ addLayer }: Props) {
   const [ selectedCollection, setSelectedCollection ] = useState<string>();
   const { collection, error: collectionError } = useCollection(selectedCollection);
   const collectionConfig = collections?.find(({ id }) => id === selectedCollection);
+  
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const handleSubmit = (config: LayerConfig) => {
+    onClose();
+    addLayer(config);
+  }
 
   const displayError = collectionError;
 
+
   return (
-    <Box>
-      <CollectionsSelect
-        collections={collections}
-        selectedCollection={selectedCollection}
-        setSelectedCollection={setSelectedCollection}
-      />
-      { (collectionConfig && collection) && <VariablesSelect config={collectionConfig} collection={collection} addLayer={addLayer} /> }
-      { displayError && <Error>{ displayError }</Error> }
+    <Box mt="2" pr="4" textAlign="right">
+      <Button variant="link" onClick={onOpen}>Add layer</Button>
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent pb="4">
+          <ModalHeader>Add data visualisation</ModalHeader>
+          <ModalCloseButton />
+
+          <ModalBody>
+            <CollectionsSelect
+              collections={collections}
+              selectedCollection={selectedCollection}
+              setSelectedCollection={setSelectedCollection}
+            />
+            { (collectionConfig && collection) && <VariablesSelect config={collectionConfig} collection={collection} addLayer={handleSubmit} /> }
+            { displayError && <Error>{ displayError }</Error> }
+          </ModalBody>
+        </ModalContent>
+      </Modal>
     </Box>
   );
 };
