@@ -12,6 +12,7 @@ type Props = {
   step: string;
   "aria-labelledby": string;
   onChange: (dateTime: string) => void;
+  onChangeEnd: (dateTime: string) => void
   value: string;
 }
 
@@ -22,6 +23,7 @@ function DateTimeSlider({
   "aria-labelledby": ariaLabelledBy,
   value,
   onChange,
+  onChangeEnd,
   ...field
 }: Props) {
   const minMs = min ? Date.parse(min) : 0;
@@ -46,6 +48,7 @@ function DateTimeSlider({
         defaultValue={minMs}
         value={valueMs}
         onChange={(v) => onChange(new Date(v).toISOString())}
+        onChangeEnd={(v) => onChangeEnd(new Date(v).toISOString())}
         {...field}
       >
         <SliderTrack>

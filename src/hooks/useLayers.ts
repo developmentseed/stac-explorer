@@ -4,6 +4,7 @@ import { LayerConfig } from "../types";
 type UseLayersFn = {
   layers: LayerConfig[];
   addLayer: (newLayer: LayerConfig) => void;
+  updateLayer: (config: LayerConfig) => void;
 }
 
 function useLayers(): UseLayersFn {
@@ -16,9 +17,21 @@ function useLayers(): UseLayersFn {
     ])
   }, [layers]);
 
+  const updateLayer = useCallback((config: LayerConfig) => {
+    const update = layers.map((layer) => {
+      if (layer.id === config.id) {
+        return config;
+      } else {
+        return layer;
+      }
+    });
+    setLayers(update);
+  }, [layers]);
+
   return {
     layers,
-    addLayer
+    addLayer,
+    updateLayer
   }
 }
 

@@ -18,6 +18,7 @@ function useCollection(selectedCollection?: CollectionConfig): UseCollectionFn {
   const { addCollection, getCollection } = useCollectionsContext();
 
   useEffect(() => {
+    setIsLoading(true);
     setCollection(undefined);
     setError(undefined);
 

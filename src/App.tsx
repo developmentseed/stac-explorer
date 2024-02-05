@@ -9,9 +9,11 @@ import theme from "./theme";
 import DataSelector from './components/DataSelector';
 import { CollectionsProvider } from "./context/collections";
 import { useLayers } from "./hooks";
+import LayerList from "./components/LayerList";
 
 export default function App() {
-  const { layers, addLayer } = useLayers();
+  const { layers, addLayer, updateLayer } = useLayers();
+
   console.log(layers);
 
   return (
@@ -25,6 +27,7 @@ export default function App() {
         >
           <GridItem>
             <Text as="h1" fontSize="large" fontWeight="bold" textTransform="uppercase" borderBottom="1px solid" borderColor="gray.100" mb="4" pb="4">STAC Explorer</Text>
+            <LayerList layers={layers} updateLayer={updateLayer} />
             <DataSelector addLayer={addLayer} />
           </GridItem>
           <GridItem bg='lightblue'>map</GridItem>
