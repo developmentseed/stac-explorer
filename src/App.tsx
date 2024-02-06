@@ -10,6 +10,7 @@ import DataSelector from './components/DataSelector';
 import { CollectionsProvider } from "./context/collections";
 import { useLayers } from "./hooks";
 import LayerList from "./components/LayerList";
+import Map from "./components/Map";
 
 export default function App() {
   const { layers, addLayer, updateLayer } = useLayers();
@@ -28,7 +29,9 @@ export default function App() {
             <LayerList layers={layers} updateLayer={updateLayer} />
             <DataSelector addLayer={addLayer} />
           </GridItem>
-          <GridItem bg='lightblue'>map</GridItem>
+          <GridItem>
+            <Map />
+          </GridItem>
         </Grid>
       </CollectionsProvider>
     </ChakraProvider>
