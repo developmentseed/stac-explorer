@@ -1,44 +1,63 @@
-import { useState } from "react";
-import { FormControl, FormLabel, Radio, RadioGroup, Stack } from "@chakra-ui/react";
+import { Button, FormControl, FormErrorMessage, Radio, RadioGroup, Stack } from "@chakra-ui/react";
+import { useForm, Controller, SubmitHandler } from "react-hook-form"
 
-import { Collection } from "../../../types";
-import DateTimeSlider from "../../generic/DateTimeSlider";
+import { SelectProps } from "./types";
 
-type Props = {
-  collection: Collection;
+type FormValues = {
+  variable: string;
+  timestep: string;
 }
 
-function CubeVariablesSelect({ collection }: Props) {
-  const [ selectedVar, setSelectedVar ] = useState<string>();
-  const [ selectedTime, setSelectedTime ] = useState<string>();
-
+function CubeVariablesSelect({ config, collection, addLayer }: SelectProps) {
   const cubeVariables = collection['cube:variables'];
   const { time } = collection['cube:dimensions'];
-  const [ timeMin, timeMax ] = time.extent;
+  const [ timeMin ] = time.extent;
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormValues>();
+
+  const onSubmit: SubmitHandler<FormValues> = ({ variable }) => {
+    addLayer({
+      id: crypto.randomUUID(),
+      name: collection.id,
+      renderConfig: {
+        variable,
+        timestep: timeMin || '1970-01-01T00:00:00Z',
+        collection: config.id
+      }
+    });
+  }
 
   return (
-    <>
-      <FormControl as="fieldset">
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <FormControl as="fieldset" isInvalid={!!errors.variable}>
         <legend>Select variable</legend>
-        <RadioGroup name="variable" onChange={setSelectedVar} value={selectedVar}>
-          <Stack direction="column">
-            {Object.keys(cubeVariables).map((variable) => (
-              <Radio value={variable} key={variable}>{ variable }</Radio>
-            ))}
-          </Stack>
-        </RadioGroup>
-      </FormControl>
-      <FormControl>
-        <FormLabel as="div" id="time-slider-label">Select time</FormLabel>
-        <DateTimeSlider
-          min={timeMin}
-          max={timeMax}
-          step={time.step}
-          aria-labelledby="time-slider-label"
-          setSelectedTime={setSelectedTime}
+        <Controller
+          name="variable"
+          control={control}
+          render={({ field }) => (
+            <RadioGroup {...field}>
+              <Stack direction="column">
+                {Object.keys(cubeVariables).map((variable) => (
+                  <Radio value={variable} key={variable}>{ variable }</Radio>
+                ))}
+              </Stack>
+            </RadioGroup>
+          )}
+          rules={{
+            required: { value: true, message: "Select a variable." }
+          }}
         />
+        { errors.variable && (
+          <FormErrorMessage>{ errors.variable.message }</FormErrorMessage>
+        )}
       </FormControl>
-    </>
+
+      <Button type="submit">Add layer</Button>
+    </form>
   );
 }
 

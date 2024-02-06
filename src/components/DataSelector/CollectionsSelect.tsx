@@ -4,7 +4,7 @@ import { CollectionConfig } from "../../types";
 type Props = {
   collections?: CollectionConfig[];
   selectedCollection?: string;
-  setSelectedCollection: (collectionId?: string) => void;
+  setSelectedCollection: (collection?: string) => void;
 }
 
 function CollectionsSelect({
@@ -12,7 +12,9 @@ function CollectionsSelect({
   selectedCollection,
   setSelectedCollection
 }: Props) {
-  const handleSelect = (event: React.ChangeEvent<HTMLSelectElement>) => setSelectedCollection(event.target.value);
+  const handleSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedCollection(event.target.value);
+  };
 
   return (
     <FormControl mb="4">

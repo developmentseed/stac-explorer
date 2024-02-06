@@ -1,6 +1,7 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import useCollections from "./useCollections";
 import { Collection } from "../types";
+import { useCollectionsContext } from "../context/collections";
 
 type UseCollectionFn = {
   isLoading: boolean;
@@ -13,16 +14,11 @@ function useCollection(selectedCollection?: string): UseCollectionFn {
   const [ isLoading, setIsLoading ] = useState<boolean>(false);
   const [ error, setError ] = useState<string>();
 
-  const [ collectionCache, setCollectionCache ] = useState<Map<string, Collection>>(new Map<string, Collection>())
   const [ collection, setCollection ] = useState<Collection>();
-
-  const getCollection = useCallback((id: string) => collectionCache.get(id), [collectionCache]);
-
-  const addCollection = useCallback((id: string, collection: Collection) => {
-    setCollectionCache(new Map(collectionCache.set(id, collection)));
-  }, [collectionCache]);
+  const { addCollection, getCollection } = useCollectionsContext();
 
   useEffect(() => {
+    setIsLoading(true);
     setCollection(undefined);
     setError(undefined);
 
