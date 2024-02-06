@@ -11,13 +11,11 @@ type Props = {
   addLayer: (layerConfig: LayerConfig) => void
 }
 
-
 function DataSelector({ addLayer }: Props) {
   const { collections } = useCollections();
 
   const [ selectedCollection, setSelectedCollection ] = useState<string>();
   const { collection, error: collectionError } = useCollection(selectedCollection);
-  const collectionConfig = collections?.find(({ id }) => id === selectedCollection);
   
   const { isOpen, onOpen, onClose } = useDisclosure();
   const handleSubmit = (config: LayerConfig) => {
@@ -43,7 +41,7 @@ function DataSelector({ addLayer }: Props) {
               selectedCollection={selectedCollection}
               setSelectedCollection={setSelectedCollection}
             />
-            { (collectionConfig && collection) && <VariablesSelect config={collectionConfig} collection={collection} addLayer={handleSubmit} /> }
+            { collection && <VariablesSelect collection={collection} addLayer={handleSubmit} /> }
             { displayError && <Error>{ displayError }</Error> }
           </ModalBody>
         </ModalContent>

@@ -1,9 +1,9 @@
 import { createContext, useCallback, useContext, useState } from "react";
-import { Collection } from "../types";
+import { CollectionConfig } from "../types";
 
 type CollectionsContextType = {
-  getCollection: (id: string) => Collection | undefined;
-  addCollection: (id: string, collection: Collection) => void;
+  getCollection: (id: string) => CollectionConfig | undefined;
+  addCollection: (id: string, collection: CollectionConfig) => void;
 }
 
 type CollectionsProviderType = {
@@ -13,11 +13,11 @@ type CollectionsProviderType = {
 export const CollectionsContext = createContext<CollectionsContextType>({} as CollectionsContextType);
 
 export function CollectionsProvider({ children }: CollectionsProviderType) {
-  const [ collectionCache, setCollectionCache ] = useState<Map<string, Collection>>(new Map<string, Collection>());
+  const [ collectionCache, setCollectionCache ] = useState<Map<string, CollectionConfig>>(new Map<string, CollectionConfig>());
 
   const getCollection = useCallback((id: string) => collectionCache.get(id), [collectionCache]);
 
-  const addCollection = useCallback((id: string, collection: Collection) => {
+  const addCollection = useCallback((id: string, collection: CollectionConfig) => {
     setCollectionCache(new Map(collectionCache.set(id, collection)));
   }, [collectionCache]);
 

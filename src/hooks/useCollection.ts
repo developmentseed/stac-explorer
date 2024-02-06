@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import useCollections from "./useCollections";
-import { Collection } from "../types";
+import { CollectionConfig } from "../types";
 import { useCollectionsContext } from "../context/collections";
 
 type UseCollectionFn = {
   isLoading: boolean;
   error?: string;
-  collection?: Collection;
+  collection?: CollectionConfig;
 }
 
 function useCollection(selectedCollection?: string): UseCollectionFn {
@@ -14,7 +14,7 @@ function useCollection(selectedCollection?: string): UseCollectionFn {
   const [ isLoading, setIsLoading ] = useState<boolean>(false);
   const [ error, setError ] = useState<string>();
 
-  const [ collection, setCollection ] = useState<Collection>();
+  const [ collection, setCollection ] = useState<CollectionConfig>();
   const { addCollection, getCollection } = useCollectionsContext();
 
   useEffect(() => {
@@ -24,14 +24,14 @@ function useCollection(selectedCollection?: string): UseCollectionFn {
 
     if (!collections || !selectedCollection) return;
 
-    const collectionConfig = collections.find(({ id }) => selectedCollection === id);
-    const { collectionStacUrl } = collectionConfig!;
-
-    new Promise<Collection>((resolve, reject) => {
+    new Promise<CollectionConfig>((resolve, reject) => {
       const c = getCollection(selectedCollection);
       if (c) {
         resolve(c);
       } else {
+        const collectionConfig = collections.find(({ id }) => selectedCollection === id);
+        const { collectionStacUrl } = collectionConfig!;
+
         fetch(collectionStacUrl)
           .then(response => {
             if (!response.ok) {
@@ -40,8 +40,12 @@ function useCollection(selectedCollection?: string): UseCollectionFn {
             return response.json();
           })
           .then(response => {
-            addCollection(selectedCollection, response);
-            resolve(response);
+            const collection = {
+              ...collectionConfig!,
+              stac: response
+            }
+            addCollection(selectedCollection, collection);
+            resolve(collection);
           })
           .catch((err) => reject(err));
       }

@@ -8,9 +8,9 @@ type FormValues = {
   timestep: string;
 }
 
-function CubeVariablesSelect({ config, collection, addLayer }: SelectProps) {
-  const cubeVariables = collection['cube:variables'];
-  const { time } = collection['cube:dimensions'];
+function CubeVariablesSelect({ collection, addLayer }: SelectProps) {
+  const cubeVariables = collection.stac['cube:variables'];
+  const { time } = collection.stac['cube:dimensions'];
   const [ timeMin ] = time.extent;
 
   const {
@@ -26,7 +26,7 @@ function CubeVariablesSelect({ config, collection, addLayer }: SelectProps) {
       renderConfig: {
         variable,
         timestep: timeMin || '1970-01-01T00:00:00Z',
-        collection: config.id
+        collection: collection.id
       }
     });
   }
