@@ -15,10 +15,10 @@ function LayerForm({ config, updateLayer }: LayerFormProps) {
     return <p>Loading...</p>
   }
 
-  const cubeVariables = collection && collection["cube:variables"];
+  const cubeVariables = collection && collection.stac["cube:variables"];
 
   if (cubeVariables) {
-    return <CubeLayerForm config={config} collection={collection} updateLayer={updateLayer} />
+    return <CubeLayerForm config={config} collection={collection.stac} updateLayer={updateLayer} />
   }
 
   return null;

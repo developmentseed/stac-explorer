@@ -1,7 +1,6 @@
-import { Collection, CollectionConfig, LayerConfig } from "../../../types";
+import { CollectionConfig, LayerConfig } from "../../../types";
 
 export type SelectProps = {
-  config: CollectionConfig
-  collection: Collection;
+  collection: CollectionConfig;
   addLayer: (layerConfig: LayerConfig) => void;
 }
