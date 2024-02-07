@@ -18,8 +18,9 @@ function Layerlist({ layers, updateLayer }: Props) {
             <AccordionItem key={id}>
               <h2>
                 <AccordionButton>
-                  <Box as="span" flex='1' textAlign='left'>
+                  <Box as="span" flex="1" textAlign="left">
                     { name }
+                    <Box as="span" fontSize="sm" color="gray.500" display="block">{ layer.renderConfig.variable }</Box>
                   </Box>
                   <AccordionIcon />
                 </AccordionButton>
