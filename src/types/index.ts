@@ -1,4 +1,4 @@
-import { StacCollection } from "stac-ts";
+import { StacCollection as Collection } from "stac-ts";
 
 type GenericObject = {
   [key: string]: any  // eslint-disable-line @typescript-eslint/no-explicit-any
@@ -26,14 +26,14 @@ export type DataCubeCollection = {
   "cube:variables": GenericObject;
 } & StacRender;
 
-export type Collection = StacCollection & DataCubeCollection;
+export type StacCollection = Collection & DataCubeCollection;
 
 export type CollectionConfig = {
   id: string;
   collectionStacUrl: string;
   displayName: string;
   tiler: string;
-  stac: Collection;
+  stac: StacCollection;
 }
 
 export type LayerConfig = {
