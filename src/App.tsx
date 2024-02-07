@@ -30,7 +30,7 @@ export default function App() {
             <DataSelector addLayer={addLayer} />
           </GridItem>
           <GridItem>
-            <Map />
+            <Map layers={layers} />
           </GridItem>
         </Grid>
       </CollectionsProvider>
