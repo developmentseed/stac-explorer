@@ -2,6 +2,12 @@
 
 A UI for visualizing data from STAC collections. Supports visualizing data in NASA's CMR when a STAC collection definition exists.
 
+## Setup
+
+### .env
+
+Copy `.env.example` to `.env.local` and add a Mapbox token
+
 ## Available Scripts
 
 In the project directory, you can run:
