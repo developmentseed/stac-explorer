@@ -25,6 +25,10 @@ function Layer({ config, beforeId }: Props) {
   const { tiler } = collection;
   const tileUrl = `${tiler}?${renderConfigToUrlParams(renderConfig)}`;
 
+  if (!config.isVisible) {
+    return null;
+  }
+
   return (
     <Source
       id={id}

@@ -23,10 +23,7 @@ function Map({ layers }: Props) {
       mapStyle="mapbox://styles/mapbox/light-v11"
     >
       <Boundaries beforeId="poi-label" />
-      { layers
-          .filter(({ isVisible }) => isVisible)
-          .map((layer) => <Layer key={layer.id} config={layer} beforeId="boundaries-z0" />)
-      }
+      { layers.map((layer) => <Layer key={layer.id} config={layer} beforeId="boundaries-z0" />) }
     </MbMap>
   );
 }
