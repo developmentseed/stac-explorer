@@ -3,7 +3,7 @@
       "id": "gpm-3imergdf-07-cmr",
       "collectionStacUrl": "/stac/GPM_3IMERGDF.stac.json", 
       "displayName": "GPM IMERG Final Precipitation L3 (GPM_3IMERGDF.v07)",
-      "tiler": "http://titiler-cmr"
+      "tiler": "https://9ox7r6pi8c.execute-api.us-west-2.amazonaws.com/tiles/WebMercatorQuad/{z}/{x}/{y}.jpg"
     },
     {
        "id": "hlsl30-v2-cmr",
@@ -15,6 +15,6 @@
       "id": "MUR-JPL-L4-GLOB-v4_1",
       "collectionStacUrl": "/stac/MUR-JPL-L4-GLOB-v4_1.stac.json", 
       "displayName": "GHRSST Level 4 MUR Global Foundation Sea Surface Temperature Analysis (v4.1)",
-      "tiler": "http://titiler-cmr"
+      "tiler": "https://9ox7r6pi8c.execute-api.us-west-2.amazonaws.com/tiles/WebMercatorQuad/{z}/{x}/{y}.jpg"
     }
 ]
