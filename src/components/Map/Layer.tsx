@@ -5,9 +5,10 @@ import { renderConfigToUrlParams } from '../../utils';
 
 type Props = {
   config: LayerConfig
+  beforeId?: string
 }
 
-function Layer({ config }: Props) {
+function Layer({ config, beforeId }: Props) {
   const { id } = config;
   const { collection: collectionId, variable, timestep } = config.renderConfig;
   const { collection } = useCollection(collectionId);
@@ -31,7 +32,7 @@ function Layer({ config }: Props) {
       tiles={[tileUrl]}
       tileSize={256}
     >
-      <GlLayer id={id} type="raster" />
+      <GlLayer id={id} type="raster" beforeId={beforeId} />
     </Source>
   );
 }

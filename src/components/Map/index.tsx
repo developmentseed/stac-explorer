@@ -2,6 +2,7 @@ import MbMap from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { LayerConfig } from '../../types';
 import Layer from './Layer';
+import Boundaries from './Boundaries';
 
 type Props = {
   layers: LayerConfig[];
@@ -21,7 +22,8 @@ function Map({ layers }: Props) {
       }}
       mapStyle="mapbox://styles/mapbox/light-v11"
     >
-      { layers.map((layer) => <Layer key={layer.id} config={layer} />)}
+      <Boundaries beforeId="poi-label" />
+      { layers.map((layer) => <Layer key={layer.id} config={layer} beforeId="boundaries-z0" />) }
     </MbMap>
   );
 }
