@@ -25,7 +25,7 @@
     "temporal_step": "P1D",
     "variables": {
       "analysed_sst": {
-        "rescale": [[271, 30]],
+        "rescale": [[271, 305]],
         "colormap": "rainbow"
       },
       "analysis_error": {
