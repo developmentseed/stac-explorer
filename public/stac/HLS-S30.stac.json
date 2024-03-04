@@ -1,0 +1,619 @@
+{
+  "type": "Collection",
+  "id": "hls-s30",
+  "stac_version": "1.0.0",
+  "description": "The Harmonized Landsat Sentinel-2 (HLS) project provides consistent surface reflectance (SR) data from the Operational Land Imager (OLI) aboard the joint NASA/USGS Landsat 8 and Landsat 9 satellites and the Multi-Spectral Instrument (MSI) aboard Europe's Copernicus Sentinel-2A and Sentinel-2B satellites. The combined measurement enables global observations of the land every 2-3 days at 30 meter (m) spatial resolution. The HLSS30 and HLSL30 products are gridded to the same resolution and Military Grid Reference System (MGRS) tiling and are 'stackable' for time series analysis.",
+  "links": [
+    {
+      "rel": "root",
+      "href": "./HLS-S30.stac.json",
+      "type": "application/json",
+      "title": "Harmonized Landsat Sentinel-2 S30"
+    },
+    {
+      "rel": "license",
+      "href": "https://lpdaac.usgs.gov/data/data-citation-and-policies/",
+      "type": "text/html",
+      "title": "LP DAAC - Data Citation and Policies"
+    },
+    {
+      "rel": "license",
+      "href": "https://sentinel.esa.int/documents/247904/690755/Sentinel_Data_Legal_Notice",
+      "type": "application/pdf",
+      "title": "Copernicus Sentinel data terms"
+    },
+    {
+      "rel": "help",
+      "href": "https://lpdaac.usgs.gov/documents/1326/HLS_User_Guide_V2.pdf",
+      "type": "application/pdf",
+      "title": "Harmonized Landsat Sentinel-2 (HLS) Product User Guide"
+    },
+    {
+      "rel": "cite-as",
+      "href": "https://doi.org/10.5067/HLS/HLSL30.002",
+      "type": "text/html",
+      "title": "LP DAAC - HLSL30 v002"
+    },
+    {
+      "rel": "cite-as",
+      "href": "https://doi.org/10.5067/HLS/HLSS30.002",
+      "type": "text/html",
+      "title": "LP DAAC - HLSS30 v002"
+    }
+  ],
+  "stac_extensions": [
+    "https://stac-extensions.github.io/classification/v1.1.0/schema.json",
+    "https://stac-extensions.github.io/eo/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/item-assets/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/raster/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/scientific/v1.0.0/schema.json"
+  ],
+  "item_assets": {
+    "B01": {
+      "raster:bands": [
+        {
+          "data_type": "int16",
+          "nodata": -9999,
+          "scale": 0.0001,
+          "spatial_resolution": 30
+        }
+      ],
+      "eo:bands": [
+        {
+          "common_name": "coastal",
+          "description": "Coastal aerosol",
+          "center_wavelength": 0.44,
+          "full_width_half_max": 0.02
+        }
+      ],
+      "title": "Coastal/Aerosol (0.43-0.45 micrometer) Nadir BRDF-Adjusted Surface Reflectance",
+      "roles": [
+        "data",
+        "reflectance"
+      ],
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized"
+    },
+    "B02": {
+      "raster:bands": [
+        {
+          "data_type": "int16",
+          "nodata": -9999,
+          "scale": 0.0001,
+          "spatial_resolution": 30
+        }
+      ],
+      "eo:bands": [
+        {
+          "common_name": "blue",
+          "description": "Visible blue",
+          "center_wavelength": 0.49,
+          "full_width_half_max": 0.09
+        }
+      ],
+      "title": "Blue (0.46-0.51 micrometer) Nadir BRDF-Adjusted Surface Reflectance",
+      "roles": [
+        "data",
+        "reflectance"
+      ],
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized"
+    },
+    "B03": {
+      "raster:bands": [
+        {
+          "data_type": "int16",
+          "nodata": -9999,
+          "scale": 0.0001,
+          "spatial_resolution": 30
+        }
+      ],
+      "eo:bands": [
+        {
+          "common_name": "green",
+          "description": "Visible green",
+          "center_wavelength": 0.56,
+          "full_width_half_max": 0.05
+        }
+      ],
+      "title": "Green (0.56-0.59 micrometer) Nadir BRDF-Adjusted Surface Reflectance",
+      "roles": [
+        "data",
+        "reflectance"
+      ],
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized"
+    },
+    "B04": {
+      "raster:bands": [
+        {
+          "data_type": "int16",
+          "nodata": -9999,
+          "scale": 0.0001,
+          "spatial_resolution": 30
+        }
+      ],
+      "eo:bands": [
+        {
+          "common_name": "red",
+          "description": "Visible red",
+          "center_wavelength": 0.655,
+          "full_width_half_max": 0.03
+        }
+      ],
+      "title": "Red (0.64-0.67 micrometer) Nadir BRDF-Adjusted Surface Reflectance",
+      "roles": [
+        "data",
+        "reflectance"
+      ],
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized"
+    },
+    "B05": {
+      "raster:bands": [
+        {
+          "data_type": "int16",
+          "nodata": -9999,
+          "scale": 0.0001,
+          "spatial_resolution": 30
+        }
+      ],
+      "eo:bands": [
+        {
+          "description": "Red-Edge 1",
+          "center_wavelength": 0.7,
+          "full_width_half_max": 0.02
+        }
+      ],
+      "title": "Red-Edge 1 (0.69-0.71 micrometer) Nadir BRDF-Adjusted Surface Reflectance",
+      "roles": [
+        "data",
+        "reflectance"
+      ],
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized"
+    },
+    "B06": {
+      "raster:bands": [
+        {
+          "data_type": "int16",
+          "nodata": -9999,
+          "scale": 0.0001,
+          "spatial_resolution": 30
+        }
+      ],
+      "eo:bands": [
+        {
+          "description": "Red-Edge 2",
+          "center_wavelength": 0.74,
+          "full_width_half_max": 0.02
+        }
+      ],
+      "title": "Red-Edge 2 (0.73-0.75 micrometer) Nadir BRDF-Adjusted Surface Reflectance",
+      "roles": [
+        "data",
+        "reflectance"
+      ],
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized"
+    },
+    "B07": {
+      "raster:bands": [
+        {
+          "data_type": "int16",
+          "nodata": -9999,
+          "scale": 0.0001,
+          "spatial_resolution": 30
+        }
+      ],
+      "eo:bands": [
+        {
+          "description": "Red-Edge 3",
+          "center_wavelength": 0.78,
+          "full_width_half_max": 0.02
+        }
+      ],
+      "title": "Red-Edge 3(0.77-0.79 micrometer) Nadir BRDF-Adjusted Surface Reflectance",
+      "roles": [
+        "data",
+        "reflectance"
+      ],
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized"
+    },
+    "B08": {
+      "raster:bands": [
+        {
+          "data_type": "int16",
+          "nodata": -9999,
+          "scale": 0.0001,
+          "spatial_resolution": 30
+        }
+      ],
+      "eo:bands": [
+        {
+          "common_name": "nir",
+          "description": "NIR broad",
+          "center_wavelength": 0.83,
+          "full_width_half_max": 0.1
+        }
+      ],
+      "title": "NIR Broad (0.78-0.88 micrometer) Nadir BRDF-Adjusted Surface Reflectance",
+      "roles": [
+        "data",
+        "reflectance"
+      ],
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized"
+    },
+    "B8A": {
+      "raster:bands": [
+        {
+          "data_type": "int16",
+          "nodata": -9999,
+          "scale": 0.0001,
+          "spatial_resolution": 30
+        }
+      ],
+      "eo:bands": [
+        {
+          "common_name": "nir",
+          "description": "NIR narrow",
+          "center_wavelength": 0.865,
+          "full_width_half_max": 0.03
+        }
+      ],
+      "title": "NIR (0.85-0.88 micrometer) Nadir BRDF-Adjusted Surface Reflectance",
+      "roles": [
+        "data",
+        "reflectance"
+      ],
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized"
+    },
+    "B11": {
+      "raster:bands": [
+        {
+          "data_type": "int16",
+          "nodata": -9999,
+          "scale": 0.0001,
+          "spatial_resolution": 30
+        }
+      ],
+      "eo:bands": [
+        {
+          "common_name": "swir16",
+          "description": "SWIR 1",
+          "center_wavelength": 1.61,
+          "full_width_half_max": 0.14
+        }
+      ],
+      "title": "SWIR16 (1.57-1.65 micrometer) Nadir BRDF-Adjusted Surface Reflectance",
+      "roles": [
+        "data",
+        "reflectance"
+      ],
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized"
+    },
+    "B12": {
+      "raster:bands": [
+        {
+          "data_type": "int16",
+          "nodata": -9999,
+          "scale": 0.0001,
+          "spatial_resolution": 30
+        }
+      ],
+      "eo:bands": [
+        {
+          "common_name": "swir22",
+          "description": "SWIR 2",
+          "center_wavelength": 2.2,
+          "full_width_half_max": 0.24
+        }
+      ],
+      "title": "SWIR22 (2.11-2.29 micrometer) Nadir BRDF-Adjusted Surface Reflectance",
+      "roles": [
+        "data",
+        "reflectance"
+      ],
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized"
+    },
+    "B09": {
+      "raster:bands": [
+        {
+          "data_type": "int16",
+          "nodata": -9999,
+          "scale": 0.0001,
+          "spatial_resolution": 30
+        }
+      ],
+      "eo:bands": [
+        {
+          "description": "Water vapor",
+          "center_wavelength": 0.94,
+          "full_width_half_max": 0.02
+        }
+      ],
+      "title": "Water Vapor (0.93-0.95 micrometer) Top of Atmosphere Reflectance",
+      "roles": [
+        "data",
+        "reflectance"
+      ],
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized"
+    },
+    "B10": {
+      "raster:bands": [
+        {
+          "data_type": "int16",
+          "nodata": -9999,
+          "scale": 0.0001,
+          "spatial_resolution": 30
+        }
+      ],
+      "eo:bands": [
+        {
+          "common_name": "cirrus",
+          "description": "Cirrus",
+          "center_wavelength": 1.37,
+          "full_width_half_max": 0.02
+        }
+      ],
+      "title": "Cirrus (1.36-1.38 micrometer) Top of Atmosphere Reflectance",
+      "roles": [
+        "data",
+        "reflectance"
+      ],
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized"
+    },
+    "fmask": {
+      "raster:bands": [
+        {
+          "data_type": "uint8",
+          "nodata": 255,
+          "unit": "bit field",
+          "spatial_resolution": 30
+        }
+      ],
+      "classification:bitfields": [
+        {
+          "name": "cloud",
+          "offset": 1,
+          "length": 1,
+          "classes": [
+            {
+              "description": "No",
+              "value": 0
+            },
+            {
+              "description": "Yes",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "name": "adjacent",
+          "description": "Adjacent to cloud/shadow",
+          "offset": 2,
+          "length": 1,
+          "classes": [
+            {
+              "description": "No",
+              "value": 0
+            },
+            {
+              "description": "Yes",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "name": "cloud_shadow",
+          "offset": 3,
+          "length": 1,
+          "classes": [
+            {
+              "description": "No",
+              "value": 0
+            },
+            {
+              "description": "Yes",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "name": "snow_ice",
+          "offset": 4,
+          "length": 1,
+          "classes": [
+            {
+              "description": "No",
+              "value": 0
+            },
+            {
+              "description": "Yes",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "name": "water",
+          "offset": 5,
+          "length": 1,
+          "classes": [
+            {
+              "description": "No",
+              "value": 0
+            },
+            {
+              "description": "Yes",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "name": "aerosol_level",
+          "offset": 6,
+          "length": 2,
+          "classes": [
+            {
+              "description": "Climatology",
+              "value": 0
+            },
+            {
+              "description": "Low",
+              "value": 1
+            },
+            {
+              "description": "Moderate",
+              "value": 2
+            },
+            {
+              "description": "High",
+              "value": 3
+            }
+          ]
+        }
+      ],
+      "title": "Quality Assessment Generated from the Function of Mask (Fmask) Algorithm",
+      "roles": [
+        "data"
+      ],
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized"
+    },
+    "saa": {
+      "raster:bands": [
+        {
+          "data_type": "uint16",
+          "nodata": 40000,
+          "unit": "degree",
+          "scale": 0.01,
+          "spatial_resolution": 30
+        }
+      ],
+      "title": "Sun Azimuth Angle (SAA)",
+      "roles": [
+        "data"
+      ],
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized"
+    },
+    "sza": {
+      "raster:bands": [
+        {
+          "data_type": "uint16",
+          "nodata": 40000,
+          "unit": "degree",
+          "scale": 0.01,
+          "spatial_resolution": 30
+        }
+      ],
+      "title": "Sun Zenith Angle (SZA)",
+      "roles": [
+        "data"
+      ],
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized"
+    },
+    "vaa": {
+      "raster:bands": [
+        {
+          "data_type": "uint16",
+          "nodata": 40000,
+          "unit": "degree",
+          "scale": 0.01,
+          "spatial_resolution": 30
+        }
+      ],
+      "title": "View Azimuth Angle (VAA)",
+      "roles": [
+        "data"
+      ],
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized"
+    },
+    "vza": {
+      "raster:bands": [
+        {
+          "data_type": "uint16",
+          "nodata": 40000,
+          "unit": "degree",
+          "scale": 0.01,
+          "spatial_resolution": 30
+        }
+      ],
+      "title": "View Zenith Angle (VZA)",
+      "roles": [
+        "data"
+      ],
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized"
+    }
+  },
+  "sci:publications": [
+    {
+      "doi": "10.1016/j.rse.2018.09.002",
+      "citation": "Claverie, M., Ju, J., Masek, J. G., Dungan, J. L., Vermote, E. F., Roger, J.-C., Skakun, S. V., & Justice, C. (2018). The Harmonized Landsat and Sentinel-2 surface reflectance data set. Remote Sensing of Environment, 219, 145-161."
+    }
+  ],
+  "title": "Harmonized Landsat Sentinel-2 S30",
+  "extent": {
+    "spatial": {
+      "bbox":[[-180,-90,180,90]]
+    },
+    "temporal": {
+      "interval":[["2015-11-28T00:00:00.000Z",null]]
+    }
+  },
+  "license": "proprietary",
+  "keywords": [
+    "NASA",
+    "USGS",
+    "Landsat",
+    "ESA",
+    "Copernicus",
+    "Sentinel",
+    "Satellite",
+    "Imagery",
+    "Global",
+    "Reflectance",
+    "Temperature"
+  ],
+  "providers": [
+    {
+      "name": "NASA LP DAAC at the USGS EROS Center",
+      "roles": [
+        "producer",
+        "licensor",
+        "processor"
+      ],
+      "url": "https://lpdaac.usgs.gov/"
+    }
+  ],
+  "summaries": {
+    "instruments": [
+      "oli",
+      "tiirs",
+      "msi"
+    ],
+    "platform": [
+      "sentinel-2a",
+      "sentinel-2b"
+    ],
+    "sci:doi": [
+      "10.5067/HLS/HLSS30.002"
+    ]
+  },
+  "renders": {
+    "truecolor": {
+      "title": "True Color",
+      "assets": [
+        "B04",
+        "B03",
+        "B02"
+      ],
+      "color_formula": "Gamma+RGB+3.5+Saturation+1.7+Sigmoidal+RGB+15+0.35",
+      "minmax_zoom": [8, 16]
+
+    },
+    "ndvi": {
+      "title": "Normalized Difference Vegetation Index",
+      "assets": [
+        "B08",
+        "B04"
+      ],
+      "colormap_name": "greens",
+      "expression": "(B08-B04)/(B08+B04)",
+      "rescale": "-1,1",
+      "minmax_zoom": [8, 16]
+    }
+  }
+}
