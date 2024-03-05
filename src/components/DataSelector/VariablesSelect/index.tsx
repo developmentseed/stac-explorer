@@ -1,13 +1,13 @@
 import { Alert, AlertDescription, AlertIcon, AlertTitle } from "@chakra-ui/alert";
 
-import CubeVariablesSelect from "./CubeVariablesSelect";
+import LayerOptionsSelect from "./LayerOptionsSelect";
 import { SelectProps } from "./types";
 
 function VariablesSelect({ collection, addLayer }: SelectProps) {
-  const cubeVariables = collection.stac["cube:variables"];
+  const layerOptions = collection.stac["cube:variables"] || collection.stac.renders;
 
-  if (cubeVariables) {
-    return <CubeVariablesSelect collection={collection} addLayer={addLayer} />
+  if (layerOptions) {
+    return <LayerOptionsSelect collection={collection} addLayer={addLayer} />
   } else {
     return (
       <Alert status="warning">

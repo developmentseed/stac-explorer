@@ -8,11 +8,22 @@ type FormValues = {
   timestep: string;
 }
 
-function CubeVariablesSelect({ collection, addLayer }: SelectProps) {
-  const cubeVariables = collection.stac['cube:variables'];
+function LayerOptionsSelect({ collection, addLayer }: SelectProps) {
+  let cubeVariables;
+  if (collection.stac.hasOwnProperty('cube:variables')) {
+    cubeVariables = collection.stac['cube:variables'];
+  }
+  let time;
+  let timeMin: any;
+  if (collection.stac.hasOwnProperty('cube:dimensions')) {
+    time = collection.stac['cube:dimensions'].time;
+    timeMin = time.extent[0];
+  } else {
+    time = collection.stac.extent.temporal;
+    [ timeMin ] = time.interval[0];
+  }
   const renderOptions = Object.keys(collection.stac['renders'])
-  const { time } = collection.stac['cube:dimensions'];
-  const [ timeMin ] = time.extent;
+  const layerOptions = cubeVariables ? Object.keys(cubeVariables) : renderOptions;
 
   const {
     control,
@@ -43,13 +54,13 @@ function CubeVariablesSelect({ collection, addLayer }: SelectProps) {
           render={({ field }) => (
             <RadioGroup {...field}>
               <Stack direction="column">
-                {Object.keys(cubeVariables).map((variable) => (
+                {layerOptions.map((layerOption) => (
                   <Radio
-                    value={variable}
-                    key={variable}
-                    isDisabled={!renderOptions.includes(variable)}
+                    value={layerOption}
+                    key={layerOption}
+                    isDisabled={!renderOptions.includes(layerOption)}
                   >
-                    { variable }
+                    { layerOption }
                   </Radio>
                 ))}
               </Stack>
@@ -69,4 +80,4 @@ function CubeVariablesSelect({ collection, addLayer }: SelectProps) {
   );
 }
 
-export default CubeVariablesSelect;
+export default LayerOptionsSelect;
