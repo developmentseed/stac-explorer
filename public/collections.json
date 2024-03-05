@@ -3,24 +3,24 @@
       "id": "gpm-3imergdf-07-cmr",
       "collectionStacUrl": "/stac/GPM_3IMERGDF.stac.json", 
       "displayName": "GPM IMERG Final Precipitation L3 (GPM_3IMERGDF.v07)",
-      "tiler": "https://9ox7r6pi8c.execute-api.us-west-2.amazonaws.com/tiles/WebMercatorQuad/{z}/{x}/{y}.png"
+      "tiler": "https://dev-titiler-cmr.delta-backend.com/tiles/WebMercatorQuad/{z}/{x}/{y}.png"
     },
     {
        "id": "hls-l30-cmr",
        "collectionStacUrl": "/stac/HLS-L30.stac.json",
        "displayName": "HLS Landsat Operational Land Imager Surface Reflectance and TOA Brightness Daily Global 30m v2.0",
-       "tiler": "http://titiler-cmr"
+       "tiler": "https://dev-titiler-cmr.delta-backend.com/tiles/WebMercatorQuad/{z}/{x}/{y}.png"
     },
     {
        "id": "hls-s30-cmr",
        "collectionStacUrl": "/stac/HLS-S30.stac.json",
        "displayName": "HLS Sentinel-2 Multi-spectral Instrument Surface Reflectance Daily Global 30m v2.0",
-       "tiler": "http://titiler-cmr"
+       "tiler": "https://dev-titiler-cmr.delta-backend.com/tiles/WebMercatorQuad/{z}/{x}/{y}.png"
     },
     {
       "id": "MUR-JPL-L4-GLOB-v4_1",
       "collectionStacUrl": "/stac/MUR-JPL-L4-GLOB-v4_1.stac.json", 
       "displayName": "GHRSST Level 4 MUR Global Foundation Sea Surface Temperature Analysis (v4.1)",
-      "tiler": "https://9ox7r6pi8c.execute-api.us-west-2.amazonaws.com/tiles/WebMercatorQuad/{z}/{x}/{y}.png"
+      "tiler": "https://dev-titiler-cmr.delta-backend.com/tiles/WebMercatorQuad/{z}/{x}/{y}.png"
     }
 ]
