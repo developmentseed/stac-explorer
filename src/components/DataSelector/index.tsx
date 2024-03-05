@@ -27,7 +27,7 @@ function DataSelector({ addLayer }: Props) {
 
 
   return (
-    <Box mt="2" pr="4" textAlign="right">
+    <Box mt="2" textAlign="right">
       <Button variant="link" onClick={onOpen}>Add layer</Button>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />

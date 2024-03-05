@@ -10,6 +10,7 @@ type FormValues = {
 
 function CubeVariablesSelect({ collection, addLayer }: SelectProps) {
   const cubeVariables = collection.stac['cube:variables'];
+  const renderOptions = Object.keys(collection.stac['renders'])
   const { time } = collection.stac['cube:dimensions'];
   const [ timeMin ] = time.extent;
 
@@ -23,6 +24,7 @@ function CubeVariablesSelect({ collection, addLayer }: SelectProps) {
     addLayer({
       id: crypto.randomUUID(),
       name: collection.id,
+      isVisible: true,
       renderConfig: {
         variable,
         timestep: timeMin || '1970-01-01T00:00:00Z',
@@ -42,7 +44,13 @@ function CubeVariablesSelect({ collection, addLayer }: SelectProps) {
             <RadioGroup {...field}>
               <Stack direction="column">
                 {Object.keys(cubeVariables).map((variable) => (
-                  <Radio value={variable} key={variable}>{ variable }</Radio>
+                  <Radio
+                    value={variable}
+                    key={variable}
+                    isDisabled={!renderOptions.includes(variable)}
+                  >
+                    { variable }
+                  </Radio>
                 ))}
               </Stack>
             </RadioGroup>

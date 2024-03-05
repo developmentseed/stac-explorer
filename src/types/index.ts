@@ -39,6 +39,7 @@ export type CollectionConfig = {
 export type LayerConfig = {
   id: string;
   name: string;
+  isVisible: boolean;
   renderConfig: {
     collection: string;
     variable?: string;
