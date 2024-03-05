@@ -6,9 +6,15 @@
       "tiler": "http://titiler-cmr"
     },
     {
-       "id": "hlsl30-v2-cmr",
-       "collectionStacUrl": "http://somehost/hlsl30-v2-cmr_collection.json",
+       "id": "hls-l30-cmr",
+       "collectionStacUrl": "/stac/HLS-L30.stac.json",
        "displayName": "HLS Landsat Operational Land Imager Surface Reflectance and TOA Brightness Daily Global 30m v2.0",
+       "tiler": "http://titiler-cmr"
+    },
+    {
+       "id": "hls-s30-cmr",
+       "collectionStacUrl": "/stac/HLS-S30.stac.json",
+       "displayName": "HLS Sentinel-2 Multi-spectral Instrument Surface Reflectance Daily Global 30m v2.0",
        "tiler": "http://titiler-cmr"
     },
     {
