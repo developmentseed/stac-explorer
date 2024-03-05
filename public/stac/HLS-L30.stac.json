@@ -607,7 +607,6 @@
       "bands_regex": "B[0-9][0-9]",
       "color_formula": "Gamma RGB 3.5, Saturation 1.7, Sigmoidal RGB 15 0.35",
       "minmax_zoom": [8, 16]
-
     },
     "ndvi": {
       "title": "Normalized Difference Vegetation Index",
