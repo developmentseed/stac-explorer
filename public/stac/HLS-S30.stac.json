@@ -2,6 +2,7 @@
   "type": "Collection",
   "id": "hls-s30",
   "stac_version": "1.0.0",
+  "collection_concept_id": "C2021957657-LPCLOUD",
   "description": "The Harmonized Landsat Sentinel-2 (HLS) project provides consistent surface reflectance (SR) data from the Operational Land Imager (OLI) aboard the joint NASA/USGS Landsat 8 and Landsat 9 satellites and the Multi-Spectral Instrument (MSI) aboard Europe's Copernicus Sentinel-2A and Sentinel-2B satellites. The combined measurement enables global observations of the land every 2-3 days at 30 meter (m) spatial resolution. The HLSS30 and HLSL30 products are gridded to the same resolution and Military Grid Reference System (MGRS) tiling and are 'stackable' for time series analysis.",
   "links": [
     {
@@ -616,7 +617,8 @@
       "colormap_name": "greens",
       "expression": "(B08-B04)/(B08+B04)",
       "rescale": "-1,1",
-      "minmax_zoom": [8, 16]
+      "minmax_zoom": [8, 16],
+      "backend": "rasterio"
     }
   }
 }
