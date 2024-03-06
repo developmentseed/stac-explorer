@@ -4,26 +4,18 @@ import { useForm, Controller, SubmitHandler } from "react-hook-form"
 import { SelectProps } from "./types";
 
 type FormValues = {
-  variable: string;
+  layerOption: string;
   timestep: string;
 }
 
 function LayerOptionsSelect({ collection, addLayer }: SelectProps) {
-  let cubeVariables;
-  if (collection.stac.hasOwnProperty('cube:variables')) {
-    cubeVariables = collection.stac['cube:variables'];
-  }
-  let time;
-  let timeMin: any;
-  if (collection.stac.hasOwnProperty('cube:dimensions')) {
-    time = collection.stac['cube:dimensions'].time;
-    timeMin = time.extent[0];
-  } else {
-    time = collection.stac.extent.temporal;
-    [ timeMin ] = time.interval[0];
-  }
-  const renderOptions = Object.keys(collection.stac['renders'])
-  const layerOptions = cubeVariables ? Object.keys(cubeVariables) : renderOptions;
+  const { stac } = collection;
+  const cubeVariables = stac['cube:variables'];
+  const layerOptions = cubeVariables ? Object.keys(cubeVariables) : Object.keys(stac.renders);
+
+  // Simplified time determination logic
+  const timeInfo = stac['cube:dimensions']?.time || stac.extent.temporal;
+  const timeMin = stac['cube:dimensions'] ? timeInfo.extent[0] : timeInfo.interval[0][0];
 
   const {
     control,
@@ -31,7 +23,7 @@ function LayerOptionsSelect({ collection, addLayer }: SelectProps) {
     formState: { errors },
   } = useForm<FormValues>();
 
-  const onSubmit: SubmitHandler<FormValues> = ({ variable }) => {
+  const onSubmit: SubmitHandler<FormValues> = ({ variable }) =>{
     addLayer({
       id: crypto.randomUUID(),
       name: collection.id,
@@ -42,39 +34,34 @@ function LayerOptionsSelect({ collection, addLayer }: SelectProps) {
         collection: collection.id
       }
     });
-  }
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <FormControl as="fieldset" isInvalid={!!errors.variable}>
-        <legend>Select variable</legend>
+      <FormControl isInvalid={!!errors.variable}>
+        <legend>Select a layer option</legend>
         <Controller
-          name="variable"
+          name="layerOption"
           control={control}
           render={({ field }) => (
             <RadioGroup {...field}>
               <Stack direction="column">
-                {layerOptions.map((layerOption) => (
+                {layerOptions.map(option => (
                   <Radio
-                    value={layerOption}
-                    key={layerOption}
-                    isDisabled={!renderOptions.includes(layerOption)}
+                    key={option}
+                    value={option}
+                    isDisabled={!layerOptions.includes(option)}
                   >
-                    { layerOption }
+                    {option}
                   </Radio>
                 ))}
               </Stack>
             </RadioGroup>
           )}
-          rules={{
-            required: { value: true, message: "Select a variable." }
-          }}
+          rules={{ required: 'Select a layer option.' }}
         />
-        { errors.variable && (
-          <FormErrorMessage>{ errors.variable.message }</FormErrorMessage>
-        )}
+        {errors.layerOption && <FormErrorMessage>{errors.layerOption.message}</FormErrorMessage>}
       </FormControl>
-
       <Button type="submit">Add layer</Button>
     </form>
   );

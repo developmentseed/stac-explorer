@@ -14,6 +14,8 @@ export function renderConfigToUrlParams(config: StacRenderObject): string {
       queryObj[key] = `${value}`;
     }
   }
+  queryObj['bands'] = queryObj['assets'] 
+  delete queryObj['assets']
 
   return new URLSearchParams(queryObj).toString();
 }
