@@ -21,7 +21,7 @@ function CubeLayerForm({ config, collection, updateLayer }: Props) {
       ...config,
       renderConfig: {
         ...config.renderConfig,
-        timestep: selectedTime
+        datetime: selectedTime
       }
     })
   }
@@ -34,7 +34,7 @@ function CubeLayerForm({ config, collection, updateLayer }: Props) {
         max={timeMax}
         step={time.step}
         aria-labelledby={labelId}
-        value={selectedTime || config.renderConfig.timestep || timeMin}
+        value={selectedTime || config.renderConfig.datetime || timeMin}
         onChange={setSelectedTime}
         onChangeEnd={submit}
       />

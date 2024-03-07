@@ -27,7 +27,7 @@ function CubeVariablesSelect({ collection, addLayer }: SelectProps) {
       isVisible: true,
       renderConfig: {
         variable,
-        timestep: timeMin || '1970-01-01T00:00:00Z',
+        datetime: timeMin || '1970-01-01T00:00:00Z',
         collection: collection.id
       }
     });
