@@ -10,14 +10,14 @@ type Props = {
 
 function Layer({ config, beforeId }: Props) {
   const { id } = config;
-  const { collection: collectionId, variable, timestep } = config.renderConfig;
+  const { collection: collectionId, variable, datetime } = config.renderConfig;
   const { collection } = useCollection(collectionId);
 
   if (!collection) return null;
 
   const renderConfig = {
     variable,
-    datetime: `${timestep!.split('T')[0]}T00:00:00Z`,
+    datetime: `${datetime!.split('T')[0]}T00:00:00Z`,
     concept_id: collection.stac.collection_concept_id,
     scale: 1,
     ...collection.stac.renders[variable!]
