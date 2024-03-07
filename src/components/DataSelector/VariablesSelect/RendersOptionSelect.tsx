@@ -4,14 +4,17 @@ import { useForm, Controller, SubmitHandler } from "react-hook-form"
 import { SelectProps } from "./types";
 
 type FormValues = {
-  layerOption: string;
+  renderOption: string;
   timestep: string;
 }
 
-function LayerOptionsSelect({ collection, addLayer }: SelectProps) {
+function RendersOptionSelect({ collection, addLayer }: SelectProps) {
   const { stac } = collection;
   const cubeVariables = stac['cube:variables'];
-  const layerOptions = cubeVariables ? Object.keys(cubeVariables) : Object.keys(stac.renders);
+  const variableOptions = cubeVariables ? Object.keys(cubeVariables) : null;
+  const renderOptions = Object.keys(stac.renders);
+  // layer options are cube variables if they exist, otherwise renderOpions
+  const layerOptions = variableOptions || renderOptions;
 
   // Simplified time determination logic
   const timeInfo = stac['cube:dimensions']?.time || stac.extent.temporal;
@@ -23,25 +26,28 @@ function LayerOptionsSelect({ collection, addLayer }: SelectProps) {
     formState: { errors },
   } = useForm<FormValues>();
 
-  const onSubmit: SubmitHandler<FormValues> = ({ variable }) =>{
+  const onSubmit: SubmitHandler<FormValues> = ({ renderOption }) =>{
+    const variable = cubeVariables && renderOption in cubeVariables ? renderOption : undefined;
+    let renderConfig = {
+      renderOption,
+      timestep: timeMin || '1970-01-01T00:00:00Z',
+      collection: collection.id,
+      variable
+    }
     addLayer({
       id: crypto.randomUUID(),
       name: collection.id,
       isVisible: true,
-      renderConfig: {
-        variable,
-        timestep: timeMin || '1970-01-01T00:00:00Z',
-        collection: collection.id
-      }
+      renderConfig
     });
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <FormControl isInvalid={!!errors.variable}>
+      <FormControl isInvalid={!!errors.renderOption}>
         <legend>Select a layer option</legend>
         <Controller
-          name="layerOption"
+          name="renderOption"
           control={control}
           render={({ field }) => (
             <RadioGroup {...field}>
@@ -50,7 +56,7 @@ function LayerOptionsSelect({ collection, addLayer }: SelectProps) {
                   <Radio
                     key={option}
                     value={option}
-                    isDisabled={!layerOptions.includes(option)}
+                    isDisabled={!renderOptions.includes(option)}
                   >
                     {option}
                   </Radio>
@@ -60,11 +66,11 @@ function LayerOptionsSelect({ collection, addLayer }: SelectProps) {
           )}
           rules={{ required: 'Select a layer option.' }}
         />
-        {errors.layerOption && <FormErrorMessage>{errors.layerOption.message}</FormErrorMessage>}
+        {errors.renderOption && <FormErrorMessage>{errors.renderOption.message}</FormErrorMessage>}
       </FormControl>
       <Button type="submit">Add layer</Button>
     </form>
   );
 }
 
-export default LayerOptionsSelect;
+export default RendersOptionSelect;

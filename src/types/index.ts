@@ -14,6 +14,9 @@ export type StacRenderObject = {
   color_formula?: string;
   resampling?: string;
   expression?: string;
+  band_regex?: string;
+  bands?: string;
+  variable?: string;
   minmax_zoom?: number[];
 }
 
@@ -43,6 +46,7 @@ export type LayerConfig = {
   renderConfig: {
     collection: string;
     variable?: string;
+    renderOption?: string;
     timestep?: string;
   }
 }

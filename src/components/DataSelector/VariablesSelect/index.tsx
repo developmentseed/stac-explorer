@@ -1,13 +1,13 @@
 import { Alert, AlertDescription, AlertIcon, AlertTitle } from "@chakra-ui/alert";
 
-import LayerOptionsSelect from "./LayerOptionsSelect";
+import RendersOptionSelect from "./RendersOptionSelect";
 import { SelectProps } from "./types";
 
 function VariablesSelect({ collection, addLayer }: SelectProps) {
-  const layerOptions = collection.stac["cube:variables"] || collection.stac.renders;
+  const renderOptions = collection.stac["cube:variables"] || collection.stac.renders;
 
-  if (layerOptions) {
-    return <LayerOptionsSelect collection={collection} addLayer={addLayer} />
+  if (renderOptions) {
+    return <RendersOptionSelect collection={collection} addLayer={addLayer} />
   } else {
     return (
       <Alert status="warning">

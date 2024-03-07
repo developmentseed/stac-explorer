@@ -35,7 +35,7 @@ function Layerlist({ layers, setVisibility, updateLayer, removeLayer }: Props) {
                     <AccordionIcon />
                     <Box as="span" flex="1" textAlign="left">
                     { name }
-                    <Box as="span" fontSize="sm" color="gray.500" display="block">{ layer.renderConfig.variable }</Box>
+                    <Box as="span" fontSize="sm" color="gray.500" display="block">{ layer.renderConfig.renderOption }</Box>
                   </Box>
                   </AccordionButton>
                 </Box>
