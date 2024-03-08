@@ -47,6 +47,6 @@ export type LayerConfig = {
     collection: string;
     variable?: string;
     renderOption?: string;
-    timestep?: string;
+    datetime?: string;
   }
 }

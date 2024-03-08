@@ -5,7 +5,7 @@ import { SelectProps } from "./types";
 
 type FormValues = {
   renderOption: string;
-  timestep: string;
+  datetime: string;
 }
 
 function VariablesSelect({ collection, addLayer }: SelectProps) {
@@ -31,7 +31,7 @@ function VariablesSelect({ collection, addLayer }: SelectProps) {
     const variable = cubeVariables && renderOption in cubeVariables ? renderOption : undefined;
     let renderConfig = {
       renderOption,
-      timestep: timeMin || '1970-01-01T00:00:00Z',
+      datetime: timeMin || '1970-01-01T00:00:00Z',
       collection: collection.id,
       variable
     }
