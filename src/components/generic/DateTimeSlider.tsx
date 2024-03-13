@@ -9,7 +9,7 @@ function epochToDisplayDate(epoch?: number): string | undefined {
 type Props = {
   min: string;
   max?: string | null;
-  step: string;
+  step?: string;
   "aria-labelledby": string;
   onChange: (dateTime: string) => void;
   onChangeEnd: (dateTime: string) => void
@@ -19,7 +19,7 @@ type Props = {
 function DateTimeSlider({
   min,
   max,
-  step,
+  step = "P1D",
   "aria-labelledby": ariaLabelledBy,
   value,
   onChange,

@@ -1,6 +1,6 @@
 import { useCollection } from "../../hooks";
 import { LayerConfig } from "../../types";
-import CubeLayerForm from "./CubeLayerForm";
+import CmrLayerForm from "./CmrLayerForm";
 
 type LayerFormProps = {
   config: LayerConfig;
@@ -15,10 +15,10 @@ function LayerForm({ config, updateLayer }: LayerFormProps) {
     return <p>Loading...</p>
   }
 
-  const cubeVariables = collection && collection.stac["cube:variables"];
+  const cubeVariables = collection && collection.stac.collection_concept_id;
 
   if (cubeVariables) {
-    return <CubeLayerForm config={config} collection={collection.stac} updateLayer={updateLayer} />
+    return <CmrLayerForm config={config} collection={collection.stac} updateLayer={updateLayer} />
   }
 
   return null;

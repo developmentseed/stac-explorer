@@ -1,17 +1,17 @@
 import { FormControl, FormLabel } from "@chakra-ui/react";
-import { DataCubeCollection, LayerConfig } from "../../types";
+import { StacCollection, LayerConfig } from "../../types";
 import DateTimeSlider from "../generic/DateTimeSlider";
 import { useState } from "react";
 
 type Props = {
   config: LayerConfig;
-  collection: DataCubeCollection;
+  collection: StacCollection;
   updateLayer: (config: LayerConfig) => void;
 }
 
-function CubeLayerForm({ config, collection, updateLayer }: Props) {
-  const { time } = collection['cube:dimensions'];
-  const [ timeMin, timeMax ] = time.extent;
+function CmrLayerForm({ config, collection, updateLayer }: Props) {
+  const time = collection['cube:dimensions']?.time || collection.extent.temporal;
+  const [ timeMin, timeMax ] = time.extent ? time.extent : time.interval[0];
   const labelId = `time-slider-label-${config.id}`;
 
   const [ selectedTime, setSelectedTime ] = useState<string>();
@@ -42,4 +42,4 @@ function CubeLayerForm({ config, collection, updateLayer }: Props) {
   );
 }
 
-export default CubeLayerForm;
+export default CmrLayerForm;
