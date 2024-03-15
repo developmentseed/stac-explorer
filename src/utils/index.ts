@@ -1,7 +1,7 @@
 import { StacRenderObject } from "../types";
 
 export function renderConfigToUrlParams(config: StacRenderObject): string {
-  const { title, ...params } = config;
+  const { title, assets, ...params } = config;
 
   const queryObj: { [key: string]: string } = {};
 
@@ -14,8 +14,12 @@ export function renderConfigToUrlParams(config: StacRenderObject): string {
       queryObj[key] = `${value}`;
     }
   }
-  queryObj['bands'] = queryObj['assets'] 
-  delete queryObj['assets']
 
-  return new URLSearchParams(queryObj).toString();
+  const searchParams = new URLSearchParams(queryObj);
+
+  for (let i = 0, len = assets.length; i < len; i++) {
+    searchParams.append('bands', assets[i]);
+  }
+
+  return searchParams.toString();
 }
