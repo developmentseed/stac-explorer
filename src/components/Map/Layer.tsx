@@ -15,12 +15,14 @@ function Layer({ config, beforeId }: Props) {
 
   if (!collection) return null;
 
+  const { minmax_zoom, ...renders } = collection.stac.renders[renderOption!]
+
   const renderConfig = {
     variable,
     datetime: `${datetime!.split('T')[0]}T00:00:00Z`,
     concept_id: collection.stac.collection_concept_id,
     scale: 1,
-    ...collection.stac.renders[renderOption!]
+    ...renders
   }
   const { tiler } = collection;
   const tileUrl = `${tiler}?${renderConfigToUrlParams(renderConfig)}`;
@@ -36,7 +38,13 @@ function Layer({ config, beforeId }: Props) {
       tiles={[tileUrl]}
       tileSize={256}
     >
-      <GlLayer id={id} type="raster" beforeId={beforeId} />
+      <GlLayer
+        id={id}
+        type="raster"
+        beforeId={beforeId}
+        minzoom={minmax_zoom ? minmax_zoom[0] : undefined}
+        maxzoom={minmax_zoom ? minmax_zoom[1] : undefined}
+      />
     </Source>
   );
 }
