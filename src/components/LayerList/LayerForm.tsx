@@ -16,7 +16,6 @@ function LayerForm({ config, updateLayer }: LayerFormProps) {
   }
 
   const cubeVariables = collection && collection.stac.collection_concept_id;
-
   if (cubeVariables) {
     return <StacLayerForm config={config} collection={collection.stac} updateLayer={updateLayer} />
   }

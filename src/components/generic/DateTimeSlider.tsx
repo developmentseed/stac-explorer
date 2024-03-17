@@ -21,7 +21,7 @@ function DateTimeSlider({
   min,
   max,
   step = "P1D",
-  datetime_range = '',
+  datetime_range,
   "aria-labelledby": ariaLabelledBy,
   value,
   onChange,
@@ -66,7 +66,6 @@ function DateTimeSlider({
           return onChange(date_string)
         }}
         onChangeEnd={(v) => {
-          console.log(`onChangeEnd v: ${v}`);
           let date_string = new Date(v).toISOString();
           if (datetime_range) {
             date_string = `${date_string}/${new Date(v + selection_range).toISOString()}`
@@ -92,7 +91,7 @@ function DateTimeSlider({
 }
 
 export default React.forwardRef<HTMLInputElement, Props>(
-  (props: Props, ref) => (
-    <DateTimeSlider {...props} />
-  )
-);;
+  (props: Props, ref) => {
+    return <DateTimeSlider {...props} />
+  }
+);
