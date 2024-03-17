@@ -29,7 +29,11 @@ export type DataCubeCollection = {
   "cube:variables": GenericObject;
 } & StacRender;
 
-export type StacCollection = Collection & DataCubeCollection;
+export type DateTimeRange = {
+  datetime_range: string;
+}
+
+export type StacCollection = Collection & DataCubeCollection & DateTimeRange;
 
 export type CollectionConfig = {
   id: string;
@@ -37,6 +41,7 @@ export type CollectionConfig = {
   displayName: string;
   tiler: string;
   stac: StacCollection;
+  datetime_range: string;
 }
 
 export type LayerConfig = {

@@ -10,6 +10,7 @@ type Props = {
   min: string;
   max?: string | null;
   step?: string;
+  datetime_range?: string;
   "aria-labelledby": string;
   onChange: (dateTime: string) => void;
   onChangeEnd: (dateTime: string) => void
@@ -20,6 +21,7 @@ function DateTimeSlider({
   min,
   max,
   step = "P1D",
+  datetime_range = '',
   "aria-labelledby": ariaLabelledBy,
   value,
   onChange,
@@ -31,12 +33,21 @@ function DateTimeSlider({
   const valueMs = value ? Date.parse(value) : undefined;
 
   const { days, hours, minutes, seconds } = parse(step);
-  const interval = 
+  const slider_interval = 
     (seconds || 0) * 1000 +
     (minutes || 0) * 60 * 1000 + 
     (hours || 0) * 60 * 60 * 1000 + 
     (days || 0) * 24 * 60 * 60 * 1000;
-  
+  let range_parsed;
+  let selection_range = 0;
+  if (datetime_range) {
+    range_parsed = parse(datetime_range);
+    selection_range = 
+      (range_parsed.seconds || 0) * 1000 +
+      (range_parsed.minutes || 0) * 60 * 1000 + 
+      (range_parsed.hours || 0) * 60 * 60 * 1000 + 
+      (range_parsed.days || 0) * 24 * 60 * 60 * 1000;
+  }
   return (
     <>
       <Slider
@@ -44,11 +55,24 @@ function DateTimeSlider({
         aria-valuetext={epochToDisplayDate(valueMs)}
         min={minMs}
         max={maxMs}
-        step={interval}
+        step={slider_interval}
         defaultValue={minMs}
         value={valueMs}
-        onChange={(v) => onChange(new Date(v).toISOString())}
-        onChangeEnd={(v) => onChangeEnd(new Date(v).toISOString())}
+        onChange={(v) => {
+          let date_string = new Date(v).toISOString();
+          if (datetime_range) {
+            date_string = `${date_string}/${new Date(v + selection_range).toISOString()}`
+          }
+          return onChange(date_string)
+        }}
+        onChangeEnd={(v) => {
+          console.log(`onChangeEnd v: ${v}`);
+          let date_string = new Date(v).toISOString();
+          if (datetime_range) {
+            date_string = `${date_string}/${new Date(v + selection_range).toISOString()}`
+          }
+          return onChangeEnd(date_string)
+        }}
         {...field}
       >
         <SliderTrack>

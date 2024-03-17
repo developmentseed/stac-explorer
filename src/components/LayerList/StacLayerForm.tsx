@@ -15,7 +15,7 @@ function StacLayerForm({ config, collection, updateLayer }: Props) {
   const labelId = `time-slider-label-${config.id}`;
 
   const [ selectedTime, setSelectedTime ] = useState<string>();
-
+  console.log(`Selected time is ${selectedTime}`);
   const submit = () => {
     updateLayer({
       ...config,
@@ -33,6 +33,7 @@ function StacLayerForm({ config, collection, updateLayer }: Props) {
         min={timeMin}
         max={timeMax}
         step={time.step}
+        datetime_range="P7D"
         aria-labelledby={labelId}
         value={selectedTime || config.renderConfig.datetime || timeMin}
         onChange={setSelectedTime}
