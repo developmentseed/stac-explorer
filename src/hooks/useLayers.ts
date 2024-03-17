@@ -19,7 +19,7 @@ function useLayers(): UseLayersFn {
     ])
   }, [layers]);
 
-  const updateLayer = useCallback((config: LayerConfig) => {
+  const updateLayer = useCallback((config: LayerConfig) => {  
     const update = layers.map((layer) => {
       if (layer.id === config.id) {
         return config;

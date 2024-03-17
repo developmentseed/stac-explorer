@@ -16,10 +16,9 @@ function Layer({ config, beforeId }: Props) {
   if (!collection) return null;
 
   const { minmax_zoom, ...renders } = collection.stac.renders[renderOption!]
-
   const renderConfig = {
-    variable,
-    datetime: `${datetime!.split('T')[0]}T00:00:00Z`,
+    variable, 
+    datetime: `${datetime!.replace(new RegExp('T00:00:00.000Z', 'g'), 'T00:00:00Z')}`,
     concept_id: collection.stac.collection_concept_id,
     scale: 1,
     ...renders

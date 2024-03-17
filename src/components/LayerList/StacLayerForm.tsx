@@ -15,7 +15,6 @@ function StacLayerForm({ config, collection, updateLayer }: Props) {
   const labelId = `time-slider-label-${config.id}`;
 
   const [ selectedTime, setSelectedTime ] = useState<string>();
-
   const submit = () => {
     updateLayer({
       ...config,

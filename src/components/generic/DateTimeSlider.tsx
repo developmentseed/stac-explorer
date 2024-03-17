@@ -1,4 +1,4 @@
-import { Slider, SliderFilledTrack, SliderThumb, SliderTrack, Text } from "@chakra-ui/react";
+import { RangeSlider, RangeSliderFilledTrack, RangeSliderThumb, RangeSliderTrack, Text } from "@chakra-ui/react";
 import React from "react";
 import { parse } from "tinyduration";
 
@@ -36,26 +36,33 @@ function DateTimeSlider({
     (minutes || 0) * 60 * 1000 + 
     (hours || 0) * 60 * 60 * 1000 + 
     (days || 0) * 24 * 60 * 60 * 1000;
-  
   return (
     <>
-      <Slider
-        aria-labelledby={ariaLabelledBy}
-        aria-valuetext={epochToDisplayDate(valueMs)}
+      <RangeSlider
+        // aria-labelledby={ariaLabelledBy}
+        // aria-valuetext={epochToDisplayDate(valueMs)}
         min={minMs}
         max={maxMs}
         step={interval}
-        defaultValue={minMs}
-        value={valueMs}
-        onChange={(v) => onChange(new Date(v).toISOString())}
-        onChangeEnd={(v) => onChangeEnd(new Date(v).toISOString())}
+        defaultValue={[minMs, minMs + interval]}
+        //value={[minMs, valueMs || minMs + interval]}
+        onChange={(values) => {
+          const dateStrings = values.map(v => new Date(v).toISOString()).join("/")
+          return onChange(dateStrings);
+        }}
+        onChangeEnd={(values) => {
+          const dateStrings = values.map(v => new Date(v).toISOString()).join("/")
+          return onChangeEnd(dateStrings);
+        }}
         {...field}
       >
-        <SliderTrack>
-          <SliderFilledTrack />
-        </SliderTrack>
-          <SliderThumb />
-      </Slider>
+        <RangeSliderTrack>
+          <RangeSliderFilledTrack />
+        </RangeSliderTrack>
+          <RangeSliderThumb index={0} />
+          <RangeSliderThumb index={1} />
+      </RangeSlider>
+      
       <Text
         as="div"
         fontSize="sm"
