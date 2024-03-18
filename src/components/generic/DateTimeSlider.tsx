@@ -30,7 +30,7 @@ function DateTimeSlider({
 }: Props) {
   const minMs = min ? Date.parse(min) : 0;
   const maxMs = max ? Date.parse(max) : Date.now();
-  const valueMs = value ? Date.parse(value) : undefined;
+  const valueMs = value ? Date.parse(value.split('/')[0]) : undefined;
 
   const { days, hours, minutes, seconds } = parse(step);
   const slider_interval = 

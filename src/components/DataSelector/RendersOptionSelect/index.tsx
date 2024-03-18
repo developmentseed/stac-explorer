@@ -2,6 +2,7 @@ import { Alert, AlertDescription, AlertIcon, AlertTitle } from "@chakra-ui/alert
 import { Button, FormControl, FormErrorMessage, Radio, RadioGroup, Stack } from "@chakra-ui/react";
 import { useForm, Controller, SubmitHandler } from "react-hook-form"
 import { SelectProps } from "./types";
+import { durationToMs } from "../../../utils";
 
 type FormValues = {
   renderOption: string;
@@ -9,7 +10,7 @@ type FormValues = {
 }
 
 function VariablesSelect({ collection, addLayer }: SelectProps) {
-  const { stac } = collection;
+  const { stac, datetime_range } = collection;
   const cubeVariables = stac['cube:variables'];
   const variableOptions = cubeVariables ? Object.keys(cubeVariables) : null;
   const renderOptions = Object.keys(stac.renders);
@@ -29,9 +30,16 @@ function VariablesSelect({ collection, addLayer }: SelectProps) {
 
   const onSubmit: SubmitHandler<FormValues> = ({ renderOption }) =>{
     const variable = cubeVariables && renderOption in cubeVariables ? renderOption : undefined;
+
+    let datetime = timeMin || '1970-01-01T00:00:00Z';
+    if (datetime_range) {
+      const interval = durationToMs(datetime_range);
+      datetime = `${timeMin}/${new Date(Date.parse(timeMin) + interval).toISOString()}`;
+    }
+
     let renderConfig = {
       renderOption,
-      datetime: timeMin || '1970-01-01T00:00:00Z',
+      datetime,
       collection: collection.id,
       variable
     }
