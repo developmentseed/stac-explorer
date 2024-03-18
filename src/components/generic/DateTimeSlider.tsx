@@ -1,6 +1,7 @@
 import { Slider, SliderFilledTrack, SliderThumb, SliderTrack, Text } from "@chakra-ui/react";
 import React from "react";
-import { durationToMs } from "../../utils";
+import { durationToMs, describeExtent } from "../../utils";
+import { parse } from "tinyduration";
 
 function epochToDisplayDate(epoch?: number): string | undefined {
   return epoch ? new Date(epoch).toUTCString() : undefined;
@@ -74,6 +75,8 @@ function DateTimeSlider({
         aria-hidden={true}
       >
         { epochToDisplayDate(valueMs) }
+        <br/>
+        { datetime_range ? `Datetime extent includes a window of an additional ${describeExtent(parse(datetime_range))}.` : ''}
       </Text>
     </>
   )

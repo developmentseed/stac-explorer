@@ -36,3 +36,17 @@ export function durationToMs(duration: string): number {
     (days || 0) * 24 * 60 * 60 * 1000;
   return interval;
 }
+
+export function describeExtent(duration: object) {
+  // Filter out properties with 0 value and map to descriptive strings
+  const nonZeroProperties = Object.entries(duration)
+    .filter(([key, value]) => value !== 0)
+    .map(([key, value]) => `${value} ${key}`);
+
+  // Join the non-zero properties with comma and return the string
+  if (nonZeroProperties.length === 0) {
+    return "No extent specified";
+  }
+
+  return nonZeroProperties.join(', ');
+}

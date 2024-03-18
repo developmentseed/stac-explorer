@@ -10,14 +10,14 @@
        "collectionStacUrl": "/stac/HLS-L30.stac.json",
        "displayName": "HLS Landsat Operational Land Imager Surface Reflectance and TOA Brightness Daily Global 30m v2.0",
        "tiler": "https://dev-titiler-cmr.delta-backend.com/tiles/WebMercatorQuad/{z}/{x}/{y}.png",
-       "datetime_range": "P7D"
+       "datetime_range": "P14D"
     },
     {
        "id": "hls-s30-cmr",
        "collectionStacUrl": "/stac/HLS-S30.stac.json",
        "displayName": "HLS Sentinel-2 Multi-spectral Instrument Surface Reflectance Daily Global 30m v2.0",
        "tiler": "https://dev-titiler-cmr.delta-backend.com/tiles/WebMercatorQuad/{z}/{x}/{y}.png",
-       "datetime_range": "P7D"
+       "datetime_range": "P14D"
     },
     {
       "id": "MUR-JPL-L4-GLOB-v4_1",
