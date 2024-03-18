@@ -19,7 +19,8 @@ function Layer({ config, beforeId }: Props) {
 
   const renderConfig = {
     variable,
-    datetime: `${datetime!.split('T')[0]}T00:00:00Z`,
+    // datetime: `${datetime!.split('T')[0]}T00:00:00Z`,
+    datetime,
     concept_id: collection.stac.collection_concept_id,
     scale: 1,
     ...renders
@@ -42,8 +43,8 @@ function Layer({ config, beforeId }: Props) {
         id={id}
         type="raster"
         beforeId={beforeId}
-        minzoom={minmax_zoom ? minmax_zoom[0] : undefined}
-        maxzoom={minmax_zoom ? minmax_zoom[1] : undefined}
+        minzoom={minmax_zoom ? minmax_zoom[0] : 0}
+        maxzoom={minmax_zoom ? minmax_zoom[1] : 22}
       />
     </Source>
   );

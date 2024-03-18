@@ -1,5 +1,6 @@
 import { useCollection } from "../../hooks";
 import { LayerConfig } from "../../types";
+import HlsLayerForm from "./HlsLayerForm";
 import StacLayerForm from "./StacLayerForm";
 
 type LayerFormProps = {
@@ -15,10 +16,15 @@ function LayerForm({ config, updateLayer }: LayerFormProps) {
     return <p>Loading...</p>
   }
 
-  const cubeVariables = collection && collection.stac.collection_concept_id;
+  const cubeVariables = collection && collection.stac['cube:variables'];
+  const datetime_range = collection && collection.datetime_range;
 
   if (cubeVariables) {
     return <StacLayerForm config={config} collection={collection.stac} updateLayer={updateLayer} />
+  }
+
+  if (datetime_range) {
+    return <HlsLayerForm config={config} collection={collection.stac} updateLayer={updateLayer} />
   }
 
   return null;

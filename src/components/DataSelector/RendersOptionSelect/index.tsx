@@ -2,6 +2,7 @@ import { Alert, AlertDescription, AlertIcon, AlertTitle } from "@chakra-ui/alert
 import { Button, FormControl, FormErrorMessage, Radio, RadioGroup, Stack } from "@chakra-ui/react";
 import { useForm, Controller, SubmitHandler } from "react-hook-form"
 import { SelectProps } from "./types";
+import { durationToMs } from "../../../utils";
 
 type FormValues = {
   renderOption: string;
@@ -9,7 +10,7 @@ type FormValues = {
 }
 
 function VariablesSelect({ collection, addLayer }: SelectProps) {
-  const { stac } = collection;
+  const { stac, datetime_range } = collection;
   const cubeVariables = stac['cube:variables'];
   const variableOptions = cubeVariables ? Object.keys(cubeVariables) : null;
   const renderOptions = Object.keys(stac.renders);
@@ -19,7 +20,7 @@ function VariablesSelect({ collection, addLayer }: SelectProps) {
 
   // Simplified time determination logic
   const timeInfo = stac['cube:dimensions']?.time || stac.extent.temporal;
-  const timeMin = stac['cube:dimensions'] ? timeInfo.extent[0] : timeInfo.interval[0][0];
+  const timeMin = (stac['cube:dimensions'] ? timeInfo.extent[0] : timeInfo.interval[0][0]) || '1970-01-01T00:00:00Z';
 
   const {
     control,
@@ -29,16 +30,25 @@ function VariablesSelect({ collection, addLayer }: SelectProps) {
 
   const onSubmit: SubmitHandler<FormValues> = ({ renderOption }) =>{
     const variable = cubeVariables && renderOption in cubeVariables ? renderOption : undefined;
+
+    let datetime = timeMin;
+    if (datetime_range) {
+      const interval = durationToMs(datetime_range[0]);
+      datetime = `${timeMin}/${new Date(Date.parse(timeMin) + interval).toISOString()}`;
+    }
+
     let renderConfig = {
       renderOption,
-      datetime: timeMin || '1970-01-01T00:00:00Z',
+      datetime,
       collection: collection.id,
       variable
     }
+
     addLayer({
       id: crypto.randomUUID(),
       name: collection.id,
       isVisible: true,
+      datetime_range,
       renderConfig
     });
   };
