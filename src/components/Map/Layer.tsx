@@ -41,8 +41,8 @@ function Layer({ config, beforeId }: Props) {
         id={id}
         type="raster"
         beforeId={beforeId}
-        minzoom={minmax_zoom ? minmax_zoom[0] : undefined}
-        maxzoom={minmax_zoom ? minmax_zoom[1] : undefined}
+        minzoom={minmax_zoom ? minmax_zoom[0] : 0}
+        maxzoom={minmax_zoom ? minmax_zoom[1] : 22}
       />
     </Source>
   );
