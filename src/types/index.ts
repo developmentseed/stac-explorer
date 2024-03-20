@@ -14,6 +14,9 @@ export type StacRenderObject = {
   color_formula?: string;
   resampling?: string;
   expression?: string;
+  band_regex?: string;
+  bands?: string;
+  variable?: string;
   minmax_zoom?: number[];
 }
 
@@ -33,6 +36,7 @@ export type CollectionConfig = {
   collectionStacUrl: string;
   displayName: string;
   tiler: string;
+  datetime_range?: [string, string];
   stac: StacCollection;
 }
 
@@ -40,9 +44,11 @@ export type LayerConfig = {
   id: string;
   name: string;
   isVisible: boolean;
+  datetime_range?: [string, string];
   renderConfig: {
     collection: string;
     variable?: string;
+    renderOption?: string;
     datetime?: string;
   }
 }

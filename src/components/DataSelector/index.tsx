@@ -4,7 +4,7 @@ import { Box, Button, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHea
 import { useCollection, useCollections } from "../../hooks";
 import { Error } from "../generic";
 import CollectionsSelect from "./CollectionsSelect";
-import VariablesSelect from "./VariablesSelect";
+import RendersOptionSelect from "./RendersOptionSelect";
 import { LayerConfig } from "../../types";
 
 type Props = {
@@ -41,7 +41,7 @@ function DataSelector({ addLayer }: Props) {
               selectedCollection={selectedCollection}
               setSelectedCollection={setSelectedCollection}
             />
-            { collection && <VariablesSelect collection={collection} addLayer={handleSubmit} /> }
+            { collection && <RendersOptionSelect collection={collection} addLayer={handleSubmit} /> }
             { displayError && <Error>{ displayError }</Error> }
           </ModalBody>
         </ModalContent>
