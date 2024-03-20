@@ -10,7 +10,7 @@ type Props = {
   updateLayer: (config: LayerConfig) => void;
 }
 
-function HlsLayerForm({ config, collection, updateLayer }: Props) {
+function LayerFormWithDatePicker({ config, collection, updateLayer }: Props) {
   const { datetime_range } = config;
   const [ timeMin, timeMax ] = collection.extent.temporal.interval[0];
   const minDate = useMemo(() => new Date(timeMin ? Date.parse(timeMin) : 0), [timeMin]);
@@ -73,4 +73,4 @@ function HlsLayerForm({ config, collection, updateLayer }: Props) {
   );
 }
 
-export default HlsLayerForm;
+export default LayerFormWithDatePicker;
