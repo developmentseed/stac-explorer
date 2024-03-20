@@ -1,7 +1,6 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { LayerConfig, StacCollection } from "../../types";
-import { FormControl, FormLabel } from "@chakra-ui/react";
-// import DateRangeSlider from "../generic/DateRangeSlider";
+import { FormControl, FormErrorMessage, FormLabel } from "@chakra-ui/react";
 import { RangeDatepicker } from "chakra-dayzed-datepicker";
 import { durationToMs } from "../../utils";
 
@@ -14,25 +13,11 @@ type Props = {
 function HlsLayerForm({ config, collection, updateLayer }: Props) {
   const { datetime_range } = config;
   const [ timeMin, timeMax ] = collection.extent.temporal.interval[0];
+  const minDate = useMemo(() => new Date(timeMin ? Date.parse(timeMin) : 0), [timeMin]);
+  const maxDate = useMemo(() => new Date(timeMax ? Date.parse(timeMax) : Date.now()), [timeMax]);
 
   const [ selectedRange, setSelectedRange ] = useState<string | undefined>(config.renderConfig.datetime);
-
-  const [minDate, maxDate] = useMemo(() => {
-    const extentMinMs = timeMin ? Date.parse(timeMin) : 0;
-    const extentMaxMs = timeMax ? Date.parse(timeMax) : Date.now();
-
-    let minMs = extentMinMs;
-    let maxMs = extentMaxMs;
-
-    const selectedDates = selectedRange ? selectedRange.split('/') : [];
-    if (selectedDates.length === 1) {
-      const interval = datetime_range ? durationToMs(datetime_range[1]) : 0;
-      minMs = interval > 0 ? Date.parse(selectedDates[0]) - interval : minMs;
-      maxMs = interval > 0 ? Date.parse(selectedDates[0]) + interval : maxMs;
-    }
-
-    return [new Date(minMs), new Date(maxMs)];
-  }, [datetime_range, selectedRange, timeMax, timeMin])
+  const [ rangeError, setRangeError ] = useState<string>('');
 
   const selectedDates = useMemo(() => {
     if (!selectedRange) {
@@ -45,24 +30,36 @@ function HlsLayerForm({ config, collection, updateLayer }: Props) {
   }, [maxDate, minDate, selectedRange]);
 
   const onChange = useCallback((dates: Date[]) => {
-    setSelectedRange(dates.map((d) => d.toISOString()).join('/'));
-  }, []);
+    const selected = dates.map((d) => d.toISOString()).join('/');
+    setSelectedRange(selected);
 
-  useEffect(() => {
-    if(selectedRange) {
+    let isValid = true;
+    if (dates.length === 2 && datetime_range) {
+      const minRangeMs = durationToMs(datetime_range[0]);
+      const maxRangeMs = durationToMs(datetime_range[1]);
+      const selectedRangeMs = dates[1].getTime() - dates[0].getTime();
+
+      if (selectedRangeMs < minRangeMs || selectedRangeMs > maxRangeMs) {
+        isValid = false;
+      }
+    }
+
+    if (dates.length === 2 && isValid) {
+      setRangeError('');
       updateLayer({
         ...config,
         renderConfig: {
           ...config.renderConfig,
-          datetime: selectedRange
+          datetime: selected
         }
       });
+    } else {
+      setRangeError('The selected date range must be greater than 7 days and smaller than 14.');
     }
-  }, [config, selectedRange, updateLayer]);
-
+  }, [config, datetime_range, updateLayer]);
 
   return (
-    <FormControl>
+    <FormControl isInvalid={!!rangeError}>
       <FormLabel as="div">Date range</FormLabel>
       <RangeDatepicker
         selectedDates={selectedDates}
@@ -71,6 +68,7 @@ function HlsLayerForm({ config, collection, updateLayer }: Props) {
         maxDate={maxDate}
         usePortal
       />
+      <FormErrorMessage>{ rangeError }</FormErrorMessage>
     </FormControl>
   );
 }
