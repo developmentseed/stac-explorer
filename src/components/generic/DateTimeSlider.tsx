@@ -1,10 +1,6 @@
 import { Slider, SliderFilledTrack, SliderThumb, SliderTrack, Text } from "@chakra-ui/react";
 import React from "react";
-import { parse } from "tinyduration";
-
-function epochToDisplayDate(epoch?: number): string | undefined {
-  return epoch ? new Date(epoch).toUTCString() : undefined;
-}
+import { durationToMs, epochToDisplayDate } from "../../utils";
 
 type Props = {
   min: string;
@@ -30,12 +26,7 @@ function DateTimeSlider({
   const maxMs = max ? Date.parse(max) : Date.now();
   const valueMs = value ? Date.parse(value) : undefined;
 
-  const { days, hours, minutes, seconds } = parse(step);
-  const interval = 
-    (seconds || 0) * 1000 +
-    (minutes || 0) * 60 * 1000 + 
-    (hours || 0) * 60 * 60 * 1000 + 
-    (days || 0) * 24 * 60 * 60 * 1000;
+  const interval = durationToMs(step);
   
   return (
     <>

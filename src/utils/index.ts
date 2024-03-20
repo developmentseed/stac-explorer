@@ -1,3 +1,4 @@
+import { parse } from "tinyduration";
 import { StacRenderObject } from "../types";
 
 export function renderConfigToUrlParams(config: StacRenderObject): string {
@@ -17,9 +18,26 @@ export function renderConfigToUrlParams(config: StacRenderObject): string {
 
   const searchParams = new URLSearchParams(queryObj);
 
-  for (let i = 0, len = assets.length; i < len; i++) {
-    searchParams.append('bands', assets[i]);
+  if (assets) {
+    for (let i = 0, len = assets.length; i < len; i++) {
+      searchParams.append('bands', assets[i]);
+    }
   }
 
   return searchParams.toString();
+}
+
+
+export function durationToMs(duration: string): number {
+  const { days, hours, minutes, seconds } = parse(duration);
+  const interval = 
+    (seconds || 0) * 1000 +
+    (minutes || 0) * 60 * 1000 + 
+    (hours || 0) * 60 * 60 * 1000 + 
+    (days || 0) * 24 * 60 * 60 * 1000;
+  return interval;
+}
+
+export function epochToDisplayDate(epoch?: number): string | undefined {
+  return epoch ? new Date(epoch).toUTCString() : undefined;
 }

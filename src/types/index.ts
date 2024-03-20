@@ -36,6 +36,7 @@ export type CollectionConfig = {
   collectionStacUrl: string;
   displayName: string;
   tiler: string;
+  datetime_range?: [string, string];
   stac: StacCollection;
 }
 
@@ -43,6 +44,7 @@ export type LayerConfig = {
   id: string;
   name: string;
   isVisible: boolean;
+  datetime_range?: [string, string];
   renderConfig: {
     collection: string;
     variable?: string;
