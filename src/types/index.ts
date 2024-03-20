@@ -6,6 +6,7 @@ type GenericObject = {
 
 export type StacRenderObject = {
   assets: string[];
+  asset_bidx?: string;
   title?: string;
   rescale?: [number, number];
   nodata?: number | string;
