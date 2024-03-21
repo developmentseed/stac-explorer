@@ -6,7 +6,7 @@
       "tiler": "https://dev-titiler-cmr.delta-backend.com/tiles/WebMercatorQuad/{z}/{x}/{y}.png"
     },
     {
-      "id": "gpm-3imergdf-07-pyrmid",
+      "id": "gpm-3imergdf-07-pyramid",
       "collectionStacUrl": "/stac/GPM_3IMERGDF_pyramid.stac.json",
       "displayName": "GPM IMERG Final Precipitation L3 (GPM_3IMERGDF.v07) Pyramid",
       "tiler": "https://dev-titiler-xarray.delta-backend.com/tiles/WebMercatorQuad/{z}/{x}/{y}.png"
