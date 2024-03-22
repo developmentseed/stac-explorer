@@ -34,12 +34,12 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          role-to-assume: ${{ secrets.DEPLOY_ROLE_ARN }}
+          role-to-assume: ${{ vars.DEPLOY_ROLE_ARN }}
           aws-region: us-west-2
 
       - name: Sync with S3 bucket
         env:
-          BUCKET: ${{ secrets.S3_BUCKET }}
+          BUCKET: ${{ vars.S3_BUCKET }}
         run: |
           aws s3 sync \
             ./build "s3://${BUCKET}" \
