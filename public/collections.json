@@ -27,7 +27,7 @@
     },
     {
       "id": "MAXAR_Emilia_Romagna_Italy_flooding_may23",
-      "collectionStacUrl": "/stac/MAXAR_Emilia_Romagna_Italy_flooding_may23.stac.json", 
+      "collectionStacUrl": "https://stac.eoapi.dev/collections/MAXAR_Emilia_Romagna_Italy_flooding_may23",
       "displayName": "MAXAR_Emilia_Romagna_Italy_flooding_may23",
       "tiler": "https://raster.eoapi.dev/collections/MAXAR_Emilia_Romagna_Italy_flooding_may23/tiles/{z}/{x}/{y}.jpg",
       "datetime_range": ["P7D", "P14D"]
