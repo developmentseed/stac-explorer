@@ -19,7 +19,6 @@ function Layer({ config, beforeId }: Props) {
 
   const renderConfig = {
     variable,
-    // datetime: `${datetime!.split('T')[0]}T00:00:00Z`,
     datetime,
     concept_id: collection.stac.collection_concept_id,
     scale: 1,

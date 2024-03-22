@@ -30,5 +30,12 @@
       "collectionStacUrl": "/stac/MUR-JPL-L4-GLOB-v4_1.stac.json", 
       "displayName": "GHRSST Level 4 MUR Global Foundation Sea Surface Temperature Analysis (v4.1)",
       "tiler": "https://dev-titiler-cmr.delta-backend.com/tiles/WebMercatorQuad/{z}/{x}/{y}.png"
+    },
+    {
+      "id": "MAXAR_Emilia_Romagna_Italy_flooding_may23",
+      "collectionStacUrl": "https://stac.eoapi.dev/collections/MAXAR_Emilia_Romagna_Italy_flooding_may23",
+      "displayName": "MAXAR_Emilia_Romagna_Italy_flooding_may23",
+      "tiler": "https://raster.eoapi.dev/collections/MAXAR_Emilia_Romagna_Italy_flooding_may23/tiles/{z}/{x}/{y}.jpg",
+      "datetime_range": ["P7D", "P14D"]
     }
 ]
