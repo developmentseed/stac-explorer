@@ -42,6 +42,5 @@ jobs:
         run: |
           aws s3 sync \
             ./build "s3://${BUCKET}" \
-            --acl public-read \
             --follow-symlinks \
             --delete
