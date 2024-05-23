@@ -302,7 +302,8 @@
                     50
                 ]
             ],
-            "backend": "xarray"
+            "backend": "xarray",
+            "url": "s3://nasa-eodc-public/GPM_3IMERGDF.07"
         },
         "randomError": {
             "title": "Renders configuration for randomError",
@@ -315,7 +316,8 @@
                     17469
                 ]
             ],
-            "backend": "xarray"
+            "backend": "xarray",
+            "url": "s3://nasa-eodc-public/GPM_3IMERGDF.07"
         }
     },
     "extent": {
