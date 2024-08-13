@@ -30,7 +30,7 @@ function Layerlist({ layers, setVisibility, updateLayer, removeLayer }: Props) {
           return (
             <AccordionItem key={id}>
               <Box display="flex" gap="1" alignItems="center" _hover={{ bgColor: 'gray.50' }}>
-                <Box as="h4" flex="1">
+                <Box as="h4" flex="1" overflow="hidden">
                   <AccordionButton px="0" _hover={{ bgColor: 'none '}}>
                     <AccordionIcon />
                     <Box as="span" flex="1" textAlign="left">

@@ -19,8 +19,12 @@ export function renderConfigToUrlParams(config: StacRenderObject): string {
   const searchParams = new URLSearchParams(queryObj);
 
   if (assets) {
-    for (let i = 0, len = assets.length; i < len; i++) {
-      searchParams.append('bands', assets[i]);
+    if (!params.asset_bidx) {
+      for (let i = 0, len = assets.length; i < len; i++) {
+        searchParams.append('bands', assets[i]);
+      }
+    } else {
+      searchParams.append('assets', assets.join(','));
     }
   }
 
